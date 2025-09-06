@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/muted.svg</file>
+        <file>resources/unmuted.svg</file>
+    </qresource>
+</RCC>

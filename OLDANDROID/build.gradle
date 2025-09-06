@@ -1,0 +1,54 @@
+// build.gradle (módulo/app) — compatível com Qt 6.9.x
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    // AGP 8.1.4 funciona bem com os wrappers que o Qt costuma gerar.
+    // (Se seu wrapper estiver bem recente, pode trocar para 8.3+ depois.)
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.4'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    // exigido pelo AGP 8+
+    namespace "com.suhanko.osccb"
+
+    compileSdkVersion 35
+    // opcional: se quiser travar a versão dos build tools
+    // buildToolsVersion "36.1.0"
+
+    defaultConfig {
+        applicationId "com.suhanko.osccb"
+        minSdkVersion 28
+        targetSdkVersion 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    // garante Java 17 (casa com o JBR do Android Studio)
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    // o Qt injeta o necessário
+}

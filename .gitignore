@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Gradle files
 .gradle/
 build/
@@ -32,3 +33,17 @@ google-services.json
 
 # Android Profiling
 *.hprof
+=======
+# Qt / CMake / Android
+build/
+cmake-build*/
+android-build/
+*.user
+*.pro.user
+*.autosave
+*.log
+*.cache
+.idea/
+.vs/
+.DS_Store
+>>>>>>> 3d15cd0 (Primeiro commit do projeto OSCCB)
