@@ -1,49 +1,61 @@
-<<<<<<< HEAD
-# Gradle files
-.gradle/
-build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
-
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
-
-# Keystore files
-*.jks
-*.keystore
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
-=======
-# Qt / CMake / Android
+# =======================================
+# Qt / QMake / CMake
+# =======================================
 build/
 cmake-build*/
-android-build/
-*.user
 *.pro.user
 *.autosave
+*.qmlc
+*.jsc
+*.qmake.stash
+
+# =======================================
+# Android (Gradle / Studio)
+# =======================================
+.gradle/
+local.properties
+*.iml
+.idea/
+*.apk
+*.ap_
+*.dex
+*.class
+*.jar
+*.keystore
+*.so
 *.log
-*.cache
+android-build/
+
+# Intermediates e caches do Android
+**/build/
+**/intermediates/
+**/outputs/
+**/captures/
+
+# =======================================
+# IDEs (Qt Creator / VS / CLion / Xcode)
+# =======================================
+*.user
+*.user.*
+*.swp
+*.swo
+*.swn
+.vscode/
 .idea/
 .vs/
+*.VC.db
+*.VC.opendb
+*.sln
+*.suo
+*.ncb
+*.opensdf
+*.db
+*.opendb
+
+# =======================================
+# Sistema operacional
+# =======================================
 .DS_Store
->>>>>>> 3d15cd0 (Primeiro commit do projeto OSCCB)
+Thumbs.db
+ehthumbs.db
+desktop.ini
