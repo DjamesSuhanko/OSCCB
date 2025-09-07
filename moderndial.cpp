@@ -3,10 +3,19 @@
 #include <QtMath>
 #include <cmath>
 
+// ⚠️ NÃO force o wrapping aqui — a MainWindow já define.
+//    Se quiser, comente a linha; manteremos visível para referência.
+//    setWrapping(false) aqui quebrou a detecção de voltas na sua lógica.
 ModernDial::ModernDial(QWidget* parent) : QDial(parent) {
     setNotchesVisible(false);
     setMouseTracking(true);
-    setWrapping(false); // quem “multiplica” é m_turns, não o wrap do QDial
+    // setWrapping(false); // REMOVIDO: quem controla é a MainWindow (wrapping(true))
+}
+
+static inline double clamp01(double x) {
+    if (x < 0.0) return 0.0;
+    if (x > 1.0) return 1.0;
+    return x;
 }
 
 void ModernDial::paintEvent(QPaintEvent* e) {
@@ -33,20 +42,31 @@ void ModernDial::paintEvent(QPaintEvent* e) {
     p.setPen(penTrack);
     p.drawArc(rect, int(startDeg * 16), int(spanDeg * 16));
 
-    // Normalização do valor 0..1
+    // --------- Normalização do valor 0..1 DENTRO DA VOLTA ----------
     const int minv = minimum();
     const int maxv = maximum();
-    double norm01 = 0.0;
+    double norm01 = 0.0; // posição na volta atual
     if (maxv > minv) {
         norm01 = double(value() - minv) / double(maxv - minv);
-        if (norm01 < 0.0) norm01 = 0.0;
-        if (norm01 > 1.0) norm01 = 1.0;
+        norm01 = clamp01(norm01);
     }
 
     // --------- PROGRESSO (VERDE) PROPORCIONAL AO TOTAL ----------
-    // Cresce linearmente 0..360° conforme 0..100% (sem wrap)
-    double progressDeg = spanDeg * norm01;
-    if (value() == maxv) progressDeg = spanDeg; // garante círculo cheio no 100%
+    // Tente ler "progress01" da MainWindow (0..1 total após 10 voltas).
+    // Se não vier, faça fallback para norm01/turns (cresce devagar).
+    double total01 = -1.0;
+    if (this->property("progress01").isValid()) {
+        bool ok = false;
+        total01 = this->property("progress01").toDouble(&ok);
+        if (!ok) total01 = -1.0;
+    }
+    if (total01 < 0.0) {
+        const int turns = qMax(1, m_turns);
+        total01 = clamp01(norm01 / double(turns));
+    }
+
+    double progressDeg = spanDeg * total01;
+    if (total01 >= 1.0) progressDeg = spanDeg; // garante círculo cheio no 100%
 
     QPen penProg(m_progressColor, m_thickness, Qt::SolidLine, Qt::RoundCap);
     p.setPen(penProg);
@@ -56,16 +76,14 @@ void ModernDial::paintEvent(QPaintEvent* e) {
         p.drawArc(rect, start16, span16);
     }
 
-    // --------- HANDLE (BOLINHA) MULTI-VOLTAS ----------
-    // Handle roda N voltas entre min→max, mas seu ângulo visível é o “wrap” na volta atual
-    const int   turns     = qMax(1, m_turns);
-    const double totalDeg = spanDeg * norm01 * turns;     // quanto “rodou” no total
-    double handleDeg = std::fmod(totalDeg, spanDeg);      // volta atual (0..spanDeg)
-    if (handleDeg < 0) handleDeg += spanDeg;
-    if (value() == maxv && turns > 0) handleDeg = spanDeg;
+    // --------- HANDLE (BOLINHA) — UMA volta por ciclo do QDial ----------
+    // A bolinha deve representar a posição DENTRO da volta atual.
+    // NÃO multiplique por "turns" aqui — as N voltas visuais acontecem
+    // porque a MainWindow atualiza o value (0..999) várias vezes (wrapping).
+    const double handleDegWithinSpan = spanDeg * norm01;
 
     // Posição do handle (horário: startDeg - handleDeg)
-    const double angleDeg = startDeg - handleDeg;
+    const double angleDeg = startDeg - handleDegWithinSpan;
     const double angleRad = qDegreesToRadians(angleDeg);
 
     const QPointF center = rect.center();
@@ -88,14 +106,12 @@ void ModernDial::paintEvent(QPaintEvent* e) {
         p.setFont(f);
 
         double percentToShow = 0.0;
-        if (m_displayTurnPercent && turns > 1) {
-            // % da volta atual (casa com a posição do handle, não com o arco verde)
-            const double turnsProgress = norm01 * turns;
-            const double fracTurn      = turnsProgress - std::floor(turnsProgress);
-            percentToShow = (value() == maxv) ? 100.0 : (fracTurn * 100.0);
-        } else {
-            // % TOTAL (casa com o arco verde)
+        if (m_displayTurnPercent && m_turns > 1) {
+            // % da volta atual (0..100 com base em norm01)
             percentToShow = norm01 * 100.0;
+        } else {
+            // % TOTAL (0..100 com base em total01)
+            percentToShow = total01 * 100.0;
         }
 
         const QString txt = QString::number(int(std::round(percentToShow))) + "%";

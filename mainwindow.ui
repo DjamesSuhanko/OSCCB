@@ -179,7 +179,7 @@ border: 0px;</string>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(40, 00, 0);
-border: 1px solid rgb(80, 80, 80);      /* opcional: força borda */
+border: 1px solid black;  /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
           </property>
@@ -403,7 +403,7 @@ border: 1px solid rgb(80, 80, 80);  ;</string>
            <widget class="QFrame" name="frame">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(40, 0, 0);
-border: 1px solid rgb(80, 80, 80);      /* opcional: força borda */
+border: 1px solid black;    /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
             </property>
@@ -438,7 +438,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -919,7 +919,7 @@ QPushButton:checked {
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -1373,7 +1373,7 @@ border: 0px;</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -1827,7 +1827,7 @@ color: white;
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -2281,7 +2281,7 @@ border: 0px;</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -2736,7 +2736,7 @@ border: 0px;
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -3197,7 +3197,7 @@ color: white;
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;     /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -3658,7 +3658,7 @@ border: 0px;
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;      /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -4125,7 +4125,7 @@ border: 0px;
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;      /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 </string>
                     </property>
@@ -4341,7 +4341,7 @@ color: white;
                               <bool>false</bool>
                              </property>
                              <property name="wrapping">
-                              <bool>true</bool>
+                              <bool>false</bool>
                              </property>
                              <property name="notchTarget">
                               <double>100.000000000000000</double>
@@ -4609,7 +4609,7 @@ border: 0px;
          <widget class="QGroupBox" name="groupBox_11">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(60, 10, 10);
-border: 1px solid rgb(120, 120, 120);      /* opcional: força borda */
+border: 1px solid black;     /* opcional: força borda */
 border-radius: 6px;   /* quanto maior o número, mais arredondado */
 color: white;
 </string>

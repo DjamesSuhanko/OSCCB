@@ -48,7 +48,6 @@ public slots:
     void onPlusClicked();
     void onMinusClicked();
 
-    void flushLRSend();
     void onPlusLRClicked();
     void onMinusLRClicked();
 

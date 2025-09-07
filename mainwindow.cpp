@@ -9,8 +9,11 @@
 #include <QTimer>
 #include <climits>
 #include <cstring>     // std::memset
+#include <QSettings>
 
-
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
+#endif
 
 // ===================== COALESCING DOS METERS (buffers + timer) =====================
 static constexpr int kNumUiCh = NUMBER_OF_CHANNELS;
@@ -65,14 +68,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(qApp, &QGuiApplication::applicationStateChanged, this,
             [](Qt::ApplicationState st){ if (st == Qt::ApplicationActive) keepScreenOn(true); });
 #endif
-
-    // Timer de envio do LR (throttle ~30 Hz)
-    sendTimerLR = new QTimer(this);
-    sendTimerLR->setSingleShot(true);
-    sendTimerLR->setInterval(33);
-    sendTimerLR->setTimerType(Qt::PreciseTimer);
-    connect(sendTimerLR, &QTimer::timeout, this, &MainWindow::flushLRSend);
-
 
     // ====== OscClient como MEMBRO ======
     osc = new OscClient(this);
@@ -140,21 +135,35 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dial_LR, &QDial::sliderPressed,  this, &MainWindow::onLRDialPressed);
     connect(ui->dial_LR, &QDial::sliderReleased, this, &MainWindow::onLRDialReleased);
 
-    // ----- Setup inicial do dial LR -----
-    ui->dial_LR->setMinimum(0);
-    ui->dial_LR->setMaximum(999);   // 1 volta = 1000 passos
+    // ----- Setup inicial do dial LR (ACUMULADOR: 10 voltas obrigatórias) -----
     ui->dial_LR->setWrapping(true);
-    ui->dial_LR->setTracking(true);
+    ui->dial_LR->setNotchesVisible(false);
+    ui->dial_LR->setRange(0, 999);       // 1 volta = 1000 passos
+    ui->dial_LR->setSingleStep(1);
+    ui->dial_LR->setPageStep(10);
 
-    lastDialLR     = ui->dial_LR->value();
-    accumLR        = 0;
+    ui->dial_LR->setProperty("turns", 10);            // visual: 10 voltas
+    ui->dial_LR->setProperty("fullCircle", true);
+    ui->dial_LR->setProperty("displayTurnPercent", false); // texto = % total
+    ui->dial_LR->setProperty("showValue", true);
+
+    // Aparência
+    ui->dial_LR->setProperty("trackColor",    QColor("#e6e6e6"));
+    ui->dial_LR->setProperty("progressColor", QColor("#00C853"));
+    ui->dial_LR->setProperty("handleColor",   QColor("#ffffff"));
+    ui->dial_LR->setProperty("textColor",     QColor("white"));
+    ui->dial_LR->setProperty("thickness",     6);
+
+    lastDialLR     = ui->dial_LR->value(); // 0..999
+    accumLR        = 0;                    // 0..10000 (10 voltas = 100%)
     currentFaderLR = 0.0f;
 
-    // Timer de envio (throttle ~30Hz)
+    // Timer único (~30 Hz) para envio do LR
     sendTimerLR = new QTimer(this);
     sendTimerLR->setSingleShot(true);
     sendTimerLR->setInterval(33);
     sendTimerLR->setTimerType(Qt::PreciseTimer);
+    connect(sendTimerLR, &QTimer::timeout, this, &MainWindow::flushLRFaderSend);
 
     // Estado visual inicial do LR
     if (ui->labelPercent_LR){
@@ -163,8 +172,6 @@ MainWindow::MainWindow(QWidget *parent)
     if (ui->pbarVol_LR){
         ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
     }
-
-    connect(sendTimerLR, &QTimer::timeout, this, &MainWindow::flushLRFaderSend);
 
     // ====== Sinais dos dials / plus / minus ======
 
@@ -411,26 +418,28 @@ MainWindow::MainWindow(QWidget *parent)
                     return;
                 }
 
+                // ==========================================================
+                // Fader LR (0..1) -> acumulador + dial_LR (0..999), label e pbar
+                // ==========================================================
                 if (addr == QLatin1String("/lr/mix/fader") && !args.isEmpty()) {
                     const float v01 = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
 
-                    // Se estiver arrastando, só atualiza o cache (não move o dial)
+                    currentFaderLR = v01;
+                    ui->dial_LR->setProperty("progress01", currentFaderLR);
+                    accumLR        = int(v01 * 10000.0f + 0.5f);
+
+                    // Se estiver arrastando, só atualiza label/barra
                     if (draggingLR) {
-                        currentFaderLR = v01;
-                        // >>> Atualiza também label/barra enquanto arrasta (coerente com canais)
                         if (ui->labelPercent_LR)
                             ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
                         if (ui->pbarVol_LR)
-                            ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+                            ui->pbarVol_LR->setValue(int(std::lround(v01 * 100.0f)));
                         return;
                     }
 
-                    currentFaderLR = v01;
-                    accumLR        = int(v01 * 10000.0f + 0.5f);
-
-                    // move o dial sem emitir signals
-                    const int steps = accumLR % 1000;
+                    // move o dial (0..999) sem emitir signals
                     {
+                        const int steps = accumLR % 1000;
                         QSignalBlocker block(ui->dial_LR);
                         ui->dial_LR->setValue(steps);
                         lastDialLR = steps;
@@ -444,8 +453,6 @@ MainWindow::MainWindow(QWidget *parent)
 
                     return;
                 }
-
-
 
                 // ==========================================================
                 // Demais paths de canal (/ch/NN/...)
@@ -521,52 +528,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Carrega labels persistidas
     loadChannelLabels();
-
-    // Exemplo de configuração 10 voltas, arco 360°, mostrando % total:
-    ui->dial_LR->setRange(0, 1000);                 // seu “range fino”
-    ui->dial_LR->setProperty("turns", 10);
-    ui->dial_LR->setProperty("fullCircle", true);
-    ui->dial_LR->setProperty("displayTurnPercent", true); // true se quiser % da volta
-
-    ui->dial_LR->setProperty("trackColor",    QColor("#e6e6e6"));
-    ui->dial_LR->setProperty("progressColor", QColor("#00C853")); // verde
-    ui->dial_LR->setProperty("handleColor",   QColor("#ffffff"));
-    ui->dial_LR->setProperty("textColor",     QColor("white"));
-    ui->dial_LR->setProperty("thickness",     6);                // espessura do arco
-    ui->dial_LR->setProperty("showValue",     true);              // mostrar 0–100% no centro
-
-
 }
 
-// void MainWindow::onLRDialValueChanged(int v)
-// {
-//     const int STEPS = 1000;
-//     const int TOTAL = 10000;
-//     const int LOW  = STEPS / 4;        // 250
-//     const int HIGH = (STEPS * 3) / 4;  // 750
-
-//     int diff = v - lastDialLR;
-//     if (lastDialLR > HIGH && v < LOW)       diff = (v + STEPS) - lastDialLR;
-//     else if (lastDialLR < LOW && v > HIGH)  diff = (v - STEPS) - lastDialLR;
-
-//     accumLR += diff;
-//     if (accumLR < 0)       accumLR = 0;
-//     if (accumLR > TOTAL)   accumLR = TOTAL;
-//     lastDialLR = v;
-
-//     currentFaderLR = accumLR / float(TOTAL); // 0..1
-
-//     // (opcional) refletir em uma barra/label de LR, se existir
-//     // ui->labelPercentLR->setText(QString::number(currentFaderLR, 'f', 4));
-//     // ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
-
-//     if (sendTimerLR) sendTimerLR->start();   // throttle
-//}
-
+// ====== LR: ACUMULADOR (10 voltas = 100%) ======
 void MainWindow::onLRDialValueChanged(int v)
 {
-    const int STEPS = 1000;
-    const int TOTAL = 10000;
+    const int STEPS = 1000;   // passos por volta
+    const int TOTAL = 10000;  // 10 voltas = 100%
+
     const int LOW  = STEPS / 4;        // 250
     const int HIGH = (STEPS * 3) / 4;  // 750
 
@@ -575,11 +544,12 @@ void MainWindow::onLRDialValueChanged(int v)
     else if (lastDialLR < LOW && v > HIGH)  diff = (v - STEPS) - lastDialLR;
 
     accumLR += diff;
-    if (accumLR < 0)       accumLR = 0;
-    if (accumLR > TOTAL)   accumLR = TOTAL;
+    if (accumLR < 0)     accumLR = 0;
+    if (accumLR > TOTAL) accumLR = TOTAL;
     lastDialLR = v;
 
-    currentFaderLR = accumLR / float(TOTAL); // 0..1
+    currentFaderLR = accumLR / float(TOTAL); // 0..1 após 10 voltas
+    ui->dial_LR->setProperty("progress01", currentFaderLR);
 
     // >>> REFLETE NA UI DO LR <<<
     if (ui->labelPercent_LR)
@@ -620,7 +590,6 @@ void MainWindow::flushLRFaderSend()
     }
 }
 
-
 void MainWindow::onMuteToggledLR(bool)
 {
     const bool muted = ui->pushButton_LR->isChecked();
@@ -635,7 +604,6 @@ void MainWindow::onMuteToggledLR(bool)
         osc->setMainLRMute(!muted);
     }
 }
-
 
 // =================== LOG ===================
 void MainWindow::appendLog(const QString &msg, const QString &color, bool bold, bool italic)
@@ -719,7 +687,6 @@ void MainWindow::loadChannelLabels()
     }
     s.endGroup();
 }
-
 
 // ============ Dial (10 voltas, envio OSC com throttle) ============
 void MainWindow::onDialValueChanged(int v)
@@ -872,8 +839,10 @@ void MainWindow::onMinusLRClicked()
     accumLR = units;
 
     currentFaderLR = accumLR / 10000.0f;
+    ui->dial_LR->setProperty("progress01", currentFaderLR);
 
-    // move o dial sem emitir signals
+
+    // move o dial sem emitir signals (0..999)
     if (ui->dial_LR) {
         int steps = accumLR % 1000;
         QSignalBlocker block(ui->dial_LR);
@@ -889,9 +858,8 @@ void MainWindow::onMinusLRClicked()
 
     // throttle de envio
     if (sendTimerLR) sendTimerLR->start();
-    // (se quiser enviar imediato, descomente:)
-    // flushLRSend();
 }
+
 void MainWindow::onMinusClicked()
 {
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
@@ -919,9 +887,6 @@ void MainWindow::onMinusClicked()
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
     if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
-
-    // Envio imediato opcional:
-    // flushFaderSend(idx);
 }
 
 void MainWindow::onPlusClicked()
@@ -951,9 +916,6 @@ void MainWindow::onPlusClicked()
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
     if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
-
-    // Envio imediato opcional:
-    // flushFaderSend(idx);
 }
 
 void MainWindow::onSceneClicked(QAbstractButton* b)
@@ -995,8 +957,10 @@ void MainWindow::onPlusLRClicked()
     accumLR = units;
 
     currentFaderLR = accumLR / 10000.0f;
+    ui->dial_LR->setProperty("progress01", currentFaderLR);
 
-    // move o dial sem emitir signals
+
+    // move o dial sem emitir signals (0..999)
     if (ui->dial_LR) {
         int steps = accumLR % 1000;
         QSignalBlocker block(ui->dial_LR);
@@ -1012,27 +976,7 @@ void MainWindow::onPlusLRClicked()
 
     // throttle de envio
     if (sendTimerLR) sendTimerLR->start();
-    // (se quiser enviar imediato, descomente:)
-    // flushLRSend();
 }
-
-void MainWindow::flushLRSend()
-{
-    if (!osc) return;
-
-    static bool s_init = false;
-    static float s_lastSent = -1.0f;
-    if (!s_init) { s_lastSent = -1.0f; s_init = true; }
-
-    const float v01 = currentFaderLR;
-    const float eps = 0.0005f; // ~0.05%
-
-    if (s_lastSent < 0.0f || std::fabs(v01 - s_lastSent) > eps) {
-        s_lastSent = v01;
-        osc->setMainLRFader(v01);
-    }
-}
-
 
 MainWindow::~MainWindow()
 {
