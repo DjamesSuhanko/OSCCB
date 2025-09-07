@@ -199,6 +199,23 @@ MainWindow::MainWindow(QWidget *parent)
         accumArr[i]        = 0;                   // começa em 0%
         currentFaderArr[i] = 0.0f;
 
+        if (dials[i]) {
+            // progresso total 0..1 para o arco verde
+            dials[i]->setProperty("progress01", currentFaderArr[i]);
+
+            // (opcional) mesmo visual do LR
+            dials[i]->setProperty("turns", 10);
+            dials[i]->setProperty("fullCircle", true);
+            dials[i]->setProperty("displayTurnPercent", false); // texto = % total (se showValue=true)
+            dials[i]->setProperty("showValue", true);          // normalmente os canais não mostram texto
+            dials[i]->setProperty("trackColor",    QColor("#e6e6e6"));
+            dials[i]->setProperty("progressColor", QColor("#00C853"));
+            dials[i]->setProperty("handleColor",   QColor("#ffffff"));
+            dials[i]->setProperty("textColor",     QColor("white"));
+            dials[i]->setProperty("thickness",     6);
+        }
+
+
         // throttle por canal (~30 Hz)
         sendTimers[i] = new QTimer(this);
         sendTimers[i]->setSingleShot(true);
@@ -470,12 +487,21 @@ MainWindow::MainWindow(QWidget *parent)
                     if (dragging[idx]) {
                         // Atualiza só o cache enquanto arrasta (não move o dial)
                         currentFaderArr[idx] = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
+
+                        // ↙↙ NOVO: mantém o arco verde proporcional durante o arrasto
+                        if (dials[idx]) dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+
+                        // (opcional) se quiser atualizar label/barra durante o arrasto:
+                        // labelsPercentArray[idx]->setText(QString::number(currentFaderArr[idx], 'f', 4));
+                        // if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(currentFaderArr[idx]*100.0f)));
                         return;
                     }
 
                     float v01 = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
                     currentFaderArr[idx] = v01;
                     accumArr[idx]        = int(v01 * 10000.0f + 0.5f);
+
+                    if (dials[idx]) dials[idx]->setProperty("progress01", currentFaderArr[idx]);
 
                     if (dials[idx]) {
                         const int steps = accumArr[idx] % 1000;
@@ -721,6 +747,9 @@ void MainWindow::onDialValueChanged(int v)
     lastDialArr[idx] = v;
 
     currentFaderArr[idx] = accum / float(TOTAL); // 0..1
+
+    if (dials[idx]) dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+
 
     const float perc = currentFaderArr[idx] * 100.0f;
     labelsPercentArray[idx]->setText(QString::number(currentFaderArr[idx], 'f', 4));

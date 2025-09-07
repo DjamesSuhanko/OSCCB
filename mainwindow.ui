@@ -735,7 +735,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QDial" name="dial_0">
+                            <widget class="ModernDial" name="dial_0">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -947,7 +947,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <item row="2" column="0">
                           <layout class="QGridLayout" name="gridLayout_11">
                            <item row="0" column="2">
-                            <widget class="QDial" name="dial_1">
+                            <widget class="ModernDial" name="dial_1">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -1414,7 +1414,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QDial" name="dial_2">
+                            <widget class="ModernDial" name="dial_2">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -1868,7 +1868,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QDial" name="dial_3">
+                            <widget class="ModernDial" name="dial_3">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -2374,7 +2374,7 @@ QPushButton:checked {
                          <item row="2" column="0">
                           <layout class="QGridLayout" name="gridLayout_22">
                            <item row="0" column="2">
-                            <widget class="QDial" name="dial_4">
+                            <widget class="ModernDial" name="dial_4">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -2921,7 +2921,7 @@ QPushButton:checked {
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QDial" name="dial_5">
+                            <widget class="ModernDial" name="dial_5">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -3387,7 +3387,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QDial" name="dial_6">
+                            <widget class="ModernDial" name="dial_6">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -3854,7 +3854,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QDial" name="dial_7">
+                            <widget class="ModernDial" name="dial_7">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
