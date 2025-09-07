@@ -804,7 +804,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="pushButton_ch01">
+                            <widget class="ModernButton" name="pushButton_ch01">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -1015,7 +1015,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QPushButton" name="pushButton_ch02">
+                            <widget class="ModernButton" name="pushButton_ch02">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -1582,7 +1582,7 @@ color: white;
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QPushButton" name="pushButton_ch03">
+                            <widget class="ModernButton" name="pushButton_ch03">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -1910,7 +1910,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <item row="4" column="0">
                           <layout class="QGridLayout" name="gridLayout_19">
                            <item row="0" column="2">
-                            <widget class="QPushButton" name="pushButton_ch04">
+                            <widget class="ModernButton" name="pushButton_ch04">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -2322,7 +2322,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                             </spacer>
                            </item>
                            <item row="0" column="2">
-                            <widget class="QPushButton" name="pushButton_ch05">
+                            <widget class="ModernButton" name="pushButton_ch05">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -2843,7 +2843,7 @@ border: 0px;
                          <item row="4" column="0">
                           <layout class="QGridLayout" name="gridLayout_28">
                            <item row="0" column="2">
-                            <widget class="QPushButton" name="pushButton_ch06">
+                            <widget class="ModernButton" name="pushButton_ch06">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -3442,7 +3442,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="pushButton_ch07">
+                            <widget class="ModernButton" name="pushButton_ch07">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -3909,7 +3909,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="pushButton_ch08">
+                            <widget class="ModernButton" name="pushButton_ch08">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -4382,7 +4382,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="pushButton_LR">
+                            <widget class="ModernButton" name="pushButton_LR">
                              <property name="minimumSize">
                               <size>
                                <width>42</width>
@@ -4833,6 +4833,11 @@ color: white;
    <class>ModernDial</class>
    <extends>QDial</extends>
    <header>moderndial.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ModernButton</class>
+   <extends>QPushButton</extends>
+   <header>modernbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

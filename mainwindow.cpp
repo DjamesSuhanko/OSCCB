@@ -539,7 +539,28 @@ MainWindow::MainWindow(QWidget *parent)
     // ====== Grupo de mute por canal ======
     group = new QButtonGroup(this);
     group->setExclusive(false);
+
+    for (int i = 0; i < NUMBER_OF_CHANNELS; ++i) {
+        auto b = static_cast<ModernButton*>(buttons[i]);
+        b->setNormalColor(QColor("#00C853"));
+        b->setHoverColor(QColor("#00C853"));
+        b->setPressedColor(QColor("#00C853"));
+        b->setCheckedColor(QColor("#E53935")); // vermelho quando checked
+        b->setTextColor(Qt::white);
+        b->setRadius(12);
+        b->setPadding(10);
+        b->setIconSizePx(18);
+    }
+
+    ui->pushButton_LR->setNormalColor(QColor("#00C853"));
+    ui->pushButton_LR->setHoverColor(QColor("#00C853"));
+    ui->pushButton_LR->setPressedColor(QColor("#00C853"));
+    ui->pushButton_LR->setCheckedColor(QColor("#E53935"));
+    ui->pushButton_LR->setTextColor(Qt::white);
+    ui->pushButton_LR->setRadius(12);
     ui->pushButton_LR->setIcon(QIcon(":/icons/resources/unmuted.svg"));
+    //ui->pushButton_LR->setText("LR");
+
     for (uint8_t i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         buttons[i]->setIcon(QIcon(":/icons/resources/unmuted.svg"));
         buttons[i]->setCheckable(true);
