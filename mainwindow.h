@@ -16,7 +16,7 @@
 #include <QGuiApplication>
 #include <QInputMethod>
 #include <QAbstractButton>
-// #include <titledialog.h> // (se não estiver usando, pode remover)
+#include <moderndial.h>
 
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6

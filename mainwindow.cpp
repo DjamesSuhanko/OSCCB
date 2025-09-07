@@ -521,6 +521,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Carrega labels persistidas
     loadChannelLabels();
+
+    // Exemplo de configuração 10 voltas, arco 360°, mostrando % total:
+    ui->dial_LR->setRange(0, 1000);                 // seu “range fino”
+    ui->dial_LR->setProperty("turns", 10);
+    ui->dial_LR->setProperty("fullCircle", true);
+    ui->dial_LR->setProperty("displayTurnPercent", true); // true se quiser % da volta
+
+    ui->dial_LR->setProperty("trackColor",    QColor("#e6e6e6"));
+    ui->dial_LR->setProperty("progressColor", QColor("#00C853")); // verde
+    ui->dial_LR->setProperty("handleColor",   QColor("#ffffff"));
+    ui->dial_LR->setProperty("textColor",     QColor("white"));
+    ui->dial_LR->setProperty("thickness",     6);                // espessura do arco
+    ui->dial_LR->setProperty("showValue",     true);              // mostrar 0–100% no centro
+
+
 }
 
 // void MainWindow::onLRDialValueChanged(int v)

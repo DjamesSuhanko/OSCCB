@@ -4321,7 +4321,7 @@ color: white;
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QDial" name="dial_LR">
+                            <widget class="ModernDial" name="dial_LR">
                              <property name="minimumSize">
                               <size>
                                <width>80</width>
@@ -4335,8 +4335,7 @@ color: white;
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">background: black;
-background-color: black;</string>
+                              <string notr="true"/>
                              </property>
                              <property name="invertedAppearance">
                               <bool>false</bool>
@@ -4829,6 +4828,13 @@ color: white;
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ModernDial</class>
+   <extends>QDial</extends>
+   <header>moderndial.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
