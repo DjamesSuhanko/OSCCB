@@ -10,6 +10,8 @@
 #include <climits>
 #include <cstring>     // std::memset
 
+
+
 // ===================== COALESCING DOS METERS (buffers + timer) =====================
 static constexpr int kNumUiCh = NUMBER_OF_CHANNELS;
 static int g_lastPctCh[kNumUiCh] = {0};
@@ -63,6 +65,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(qApp, &QGuiApplication::applicationStateChanged, this,
             [](Qt::ApplicationState st){ if (st == Qt::ApplicationActive) keepScreenOn(true); });
 #endif
+
+    // Timer de envio do LR (throttle ~30 Hz)
+    sendTimerLR = new QTimer(this);
+    sendTimerLR->setSingleShot(true);
+    sendTimerLR->setInterval(33);
+    sendTimerLR->setTimerType(Qt::PreciseTimer);
+    connect(sendTimerLR, &QTimer::timeout, this, &MainWindow::flushLRSend);
+
 
     // ====== OscClient como MEMBRO ======
     osc = new OscClient(this);
@@ -125,7 +135,43 @@ MainWindow::MainWindow(QWidget *parent)
     }
     connect(sceneGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onSceneClicked(QAbstractButton*)));
 
+    // ----- Liga sinais do dial LR -----
+    connect(ui->dial_LR, SIGNAL(valueChanged(int)), this, SLOT(onLRDialValueChanged(int)));
+    connect(ui->dial_LR, &QDial::sliderPressed,  this, &MainWindow::onLRDialPressed);
+    connect(ui->dial_LR, &QDial::sliderReleased, this, &MainWindow::onLRDialReleased);
+
+    // ----- Setup inicial do dial LR -----
+    ui->dial_LR->setMinimum(0);
+    ui->dial_LR->setMaximum(999);   // 1 volta = 1000 passos
+    ui->dial_LR->setWrapping(true);
+    ui->dial_LR->setTracking(true);
+
+    lastDialLR     = ui->dial_LR->value();
+    accumLR        = 0;
+    currentFaderLR = 0.0f;
+
+    // Timer de envio (throttle ~30Hz)
+    sendTimerLR = new QTimer(this);
+    sendTimerLR->setSingleShot(true);
+    sendTimerLR->setInterval(33);
+    sendTimerLR->setTimerType(Qt::PreciseTimer);
+
+    // Estado visual inicial do LR
+    if (ui->labelPercent_LR){
+        ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
+    }
+    if (ui->pbarVol_LR){
+        ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+    }
+
+    connect(sendTimerLR, &QTimer::timeout, this, &MainWindow::flushLRFaderSend);
+
     // ====== Sinais dos dials / plus / minus ======
+
+    // === Plus/Minus do LR ===
+    connect(ui->pbPlus_LR,  &QPushButton::clicked, this, &MainWindow::onPlusLRClicked);
+    connect(ui->pbMinus_LR, &QPushButton::clicked, this, &MainWindow::onMinusLRClicked);
+
     for (int i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         connect(dials[i], SIGNAL(valueChanged(int)), this, SLOT(onDialValueChanged(int)));
         connect(dials[i], &QDial::sliderPressed,  this, &MainWindow::onDialPressed);
@@ -366,9 +412,40 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 if (addr == QLatin1String("/lr/mix/fader") && !args.isEmpty()) {
-                    // reservado para refletir valor do LR, se desejar
+                    const float v01 = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
+
+                    // Se estiver arrastando, só atualiza o cache (não move o dial)
+                    if (draggingLR) {
+                        currentFaderLR = v01;
+                        // >>> Atualiza também label/barra enquanto arrasta (coerente com canais)
+                        if (ui->labelPercent_LR)
+                            ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
+                        if (ui->pbarVol_LR)
+                            ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+                        return;
+                    }
+
+                    currentFaderLR = v01;
+                    accumLR        = int(v01 * 10000.0f + 0.5f);
+
+                    // move o dial sem emitir signals
+                    const int steps = accumLR % 1000;
+                    {
+                        QSignalBlocker block(ui->dial_LR);
+                        ui->dial_LR->setValue(steps);
+                        lastDialLR = steps;
+                    }
+
+                    // >>> REFLETE NA UI DO LR <<<
+                    if (ui->labelPercent_LR)
+                        ui->labelPercent_LR->setText(QString::number(v01, 'f', 4));
+                    if (ui->pbarVol_LR)
+                        ui->pbarVol_LR->setValue(int(std::lround(v01 * 100.0f)));
+
                     return;
                 }
+
+
 
                 // ==========================================================
                 // Demais paths de canal (/ch/NN/...)
@@ -445,6 +522,89 @@ MainWindow::MainWindow(QWidget *parent)
     // Carrega labels persistidas
     loadChannelLabels();
 }
+
+// void MainWindow::onLRDialValueChanged(int v)
+// {
+//     const int STEPS = 1000;
+//     const int TOTAL = 10000;
+//     const int LOW  = STEPS / 4;        // 250
+//     const int HIGH = (STEPS * 3) / 4;  // 750
+
+//     int diff = v - lastDialLR;
+//     if (lastDialLR > HIGH && v < LOW)       diff = (v + STEPS) - lastDialLR;
+//     else if (lastDialLR < LOW && v > HIGH)  diff = (v - STEPS) - lastDialLR;
+
+//     accumLR += diff;
+//     if (accumLR < 0)       accumLR = 0;
+//     if (accumLR > TOTAL)   accumLR = TOTAL;
+//     lastDialLR = v;
+
+//     currentFaderLR = accumLR / float(TOTAL); // 0..1
+
+//     // (opcional) refletir em uma barra/label de LR, se existir
+//     // ui->labelPercentLR->setText(QString::number(currentFaderLR, 'f', 4));
+//     // ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+
+//     if (sendTimerLR) sendTimerLR->start();   // throttle
+//}
+
+void MainWindow::onLRDialValueChanged(int v)
+{
+    const int STEPS = 1000;
+    const int TOTAL = 10000;
+    const int LOW  = STEPS / 4;        // 250
+    const int HIGH = (STEPS * 3) / 4;  // 750
+
+    int diff = v - lastDialLR;
+    if (lastDialLR > HIGH && v < LOW)       diff = (v + STEPS) - lastDialLR;
+    else if (lastDialLR < LOW && v > HIGH)  diff = (v - STEPS) - lastDialLR;
+
+    accumLR += diff;
+    if (accumLR < 0)       accumLR = 0;
+    if (accumLR > TOTAL)   accumLR = TOTAL;
+    lastDialLR = v;
+
+    currentFaderLR = accumLR / float(TOTAL); // 0..1
+
+    // >>> REFLETE NA UI DO LR <<<
+    if (ui->labelPercent_LR)
+        ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
+    if (ui->pbarVol_LR)
+        ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+
+    if (sendTimerLR) sendTimerLR->start();   // throttle
+}
+
+void MainWindow::onLRDialPressed()
+{
+    draggingLR = true;
+    // mantemos o timer rodando durante arraste (throttle)
+}
+
+void MainWindow::onLRDialReleased()
+{
+    draggingLR = false;
+    if (sendTimerLR) sendTimerLR->stop();
+    flushLRFaderSend(); // envio final imediato
+}
+
+void MainWindow::flushLRFaderSend()
+{
+    if (!osc) return;
+
+    // coalescing leve (igual aos canais)
+    static bool  s_init = false;
+    static float s_lastSent = -1.0f;
+    if (!s_init) { s_lastSent = -1.0f; s_init = true; }
+
+    const float v01 = currentFaderLR;
+    const float eps = 0.0005f;
+    if (s_lastSent < 0.0f || std::fabs(v01 - s_lastSent) > eps) {
+        s_lastSent = v01;
+        osc->setMainLRFader(v01);
+    }
+}
+
 
 void MainWindow::onMuteToggledLR(bool)
 {
@@ -544,6 +704,7 @@ void MainWindow::loadChannelLabels()
     }
     s.endGroup();
 }
+
 
 // ============ Dial (10 voltas, envio OSC com throttle) ============
 void MainWindow::onDialValueChanged(int v)
@@ -686,6 +847,36 @@ void MainWindow::onOscMeter(float val01)
     }
 }
 
+void MainWindow::onMinusLRClicked()
+{
+    const int TOTAL = 10000;     // 0..100.00% em unidades
+    const int STEP  = 100;       // 1%
+
+    int units = accumLR - STEP;
+    if (units < 0) units = 0;
+    accumLR = units;
+
+    currentFaderLR = accumLR / 10000.0f;
+
+    // move o dial sem emitir signals
+    if (ui->dial_LR) {
+        int steps = accumLR % 1000;
+        QSignalBlocker block(ui->dial_LR);
+        ui->dial_LR->setValue(steps);
+        lastDialLR = steps;
+    }
+
+    // atualiza UI (label e barra)
+    if (ui->labelPercent_LR)
+        ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
+    if (ui->pbarVol_LR)
+        ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+
+    // throttle de envio
+    if (sendTimerLR) sendTimerLR->start();
+    // (se quiser enviar imediato, descomente:)
+    // flushLRSend();
+}
 void MainWindow::onMinusClicked()
 {
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
@@ -778,6 +969,55 @@ void MainWindow::updateMeterDecay()
         ui->progressBar_0->setValue(meterDisplay);
     }
 }
+
+void MainWindow::onPlusLRClicked()
+{
+    const int TOTAL = 10000;     // 0..100.00% em unidades
+    const int STEP  = 100;       // 1%
+
+    int units = accumLR + STEP;
+    if (units > TOTAL) units = TOTAL;
+    accumLR = units;
+
+    currentFaderLR = accumLR / 10000.0f;
+
+    // move o dial sem emitir signals
+    if (ui->dial_LR) {
+        int steps = accumLR % 1000;
+        QSignalBlocker block(ui->dial_LR);
+        ui->dial_LR->setValue(steps);
+        lastDialLR = steps;
+    }
+
+    // atualiza UI (label e barra)
+    if (ui->labelPercent_LR)
+        ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
+    if (ui->pbarVol_LR)
+        ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+
+    // throttle de envio
+    if (sendTimerLR) sendTimerLR->start();
+    // (se quiser enviar imediato, descomente:)
+    // flushLRSend();
+}
+
+void MainWindow::flushLRSend()
+{
+    if (!osc) return;
+
+    static bool s_init = false;
+    static float s_lastSent = -1.0f;
+    if (!s_init) { s_lastSent = -1.0f; s_init = true; }
+
+    const float v01 = currentFaderLR;
+    const float eps = 0.0005f; // ~0.05%
+
+    if (s_lastSent < 0.0f || std::fabs(v01 - s_lastSent) > eps) {
+        s_lastSent = v01;
+        osc->setMainLRFader(v01);
+    }
+}
+
 
 MainWindow::~MainWindow()
 {

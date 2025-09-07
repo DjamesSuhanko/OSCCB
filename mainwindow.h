@@ -48,6 +48,10 @@ public slots:
     void onPlusClicked();
     void onMinusClicked();
 
+    void flushLRSend();
+    void onPlusLRClicked();
+    void onMinusLRClicked();
+
 private slots:
     void updateMeterDecay();
     void onMuteToggled(int id, bool checked);
@@ -68,6 +72,11 @@ private slots:
     void onDialPressed();
     void onDialReleased();
     void flushFaderSend(int idx);
+
+    void onLRDialValueChanged(int v);
+    void onLRDialPressed();
+    void onLRDialReleased();
+    void flushLRFaderSend();
 
 private:
     Ui::MainWindow *ui;
@@ -121,6 +130,13 @@ private:
                    bool italic = false);
 
     bool startedMsgs = false;
+
+    // ---- LR fader (estado próprio) ----
+    int   lastDialLR = 0;
+    int   accumLR    = 0;       // 0..10000
+    float currentFaderLR = 0.0f;
+    bool  draggingLR = false;
+    QTimer* sendTimerLR = nullptr;
 };
 
 #endif // MAINWINDOW_H

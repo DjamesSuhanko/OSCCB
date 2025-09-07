@@ -118,7 +118,7 @@ QDial::handle {
           <property name="title">
            <string>GroupBox</string>
           </property>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <property name="geometry">
             <rect>
              <x>150</x>
@@ -4333,6 +4333,13 @@ color: white;
                                <width>80</width>
                                <height>80</height>
                               </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background: black;
+background-color: black;</string>
+                             </property>
+                             <property name="invertedAppearance">
+                              <bool>false</bool>
                              </property>
                              <property name="wrapping">
                               <bool>true</bool>
