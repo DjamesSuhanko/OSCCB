@@ -1,2 +1,4 @@
 # OSCCB
-Operador de Som CCB - Ou, "Open Sound CCB"...
+
+Open Sound Control Create in Brazil
+
