@@ -18,6 +18,7 @@
 #include <QAbstractButton>
 #include <moderndial.h>
 #include <modernbutton.h>
+#include <modernprogressbar.h>
 
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
@@ -111,11 +112,11 @@ private:
     QPushButton *titlesArray[NUMBER_OF_CHANNELS]{};
     QPushButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)
 
-    QPushButton *pbPlus[NUMBER_OF_CHANNELS]{};
-    QPushButton *pbMinus[NUMBER_OF_CHANNELS]{};
+    ModernButton *pbPlus[NUMBER_OF_CHANNELS]{};
+    ModernButton *pbMinus[NUMBER_OF_CHANNELS]{};
 
     QLabel *labelsPercentArray[NUMBER_OF_CHANNELS]{};
-    QProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
+    ModernProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
     QProgressBar*  meterBarsArray[NUMBER_OF_CHANNELS]{};
 
     QDial* dials[NUMBER_OF_CHANNELS]{};

@@ -17,6 +17,7 @@ SOURCES += \
     mainwindow.cpp \
     modernbutton.cpp \
     moderndial.cpp \
+    modernprogressbar.cpp \
     oscclient.cpp \
     titledialog.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     mainwindow.h \
     modernbutton.h \
     moderndial.h \
+    modernprogressbar.h \
     oscclient.h \
     titledialog.h
 

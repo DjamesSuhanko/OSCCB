@@ -526,7 +526,7 @@ MainWindow::MainWindow(QWidget *parent)
                             QSignalBlocker block(buttons[idx]); // evita idToggled -> onMuteToggled -> loop
                             buttons[idx]->setChecked(shouldChecked);
                         }
-                        // ÍCONE **NÃO** é alterado aqui (fica sob controle dos seus handlers de UI)
+                        // ÍCONE **NÃO** é alterado aqui (fica sob controle dos handlers de UI)
                     }
                     return;
                 }
@@ -552,20 +552,82 @@ MainWindow::MainWindow(QWidget *parent)
         b->setIconSizePx(18);
     }
 
+
+    ui->pbPlus_LR->setNormalColor(QColor("#00C853"));
+    ui->pbPlus_LR->setHoverColor(QColor("#00C853"));
+    ui->pbPlus_LR->setPressedColor(QColor("#00C853"));
+    ui->pbPlus_LR->setTextColor(Qt::white);
+    ui->pbPlus_LR->setRadius(6);
+    ui->pbPlus_LR->setPadding(10);
+    ui->pbPlus_LR->setText("+");
+    ui->pbPlus_LR->setCheckable(false);
+
+    ui->pbMinus_LR->setNormalColor(QColor("#00C853"));
+    ui->pbMinus_LR->setHoverColor(QColor("#00C853"));
+    ui->pbMinus_LR->setPressedColor(QColor("#00C853"));
+    ui->pbMinus_LR->setTextColor(Qt::white);
+    ui->pbMinus_LR->setRadius(6);
+    ui->pbMinus_LR->setPadding(10);
+    ui->pbMinus_LR->setText("-");
+    ui->pbMinus_LR->setCheckable(false);
+
+    for (uint8_t i=0; i<NUMBER_OF_CHANNELS;i++){
+        pbPlus[i]->setNormalColor(QColor("#00C853"));
+        pbPlus[i]->setHoverColor(QColor("#00C853"));
+        pbPlus[i]->setPressedColor(QColor("#00C853"));
+        pbPlus[i]->setTextColor(Qt::white);
+        pbPlus[i]->setRadius(6);
+        pbPlus[i]->setPadding(10);
+        pbPlus[i]->setText("+");
+        pbPlus[i]->setCheckable(false);
+
+        pbPlus[i]->setMinimumSize(30,30);
+        pbPlus[i]->setMaximumSize(30,30);
+
+        pbMinus[i]->setNormalColor(QColor("#00C853"));
+        pbMinus[i]->setHoverColor(QColor("#00C853"));
+        pbMinus[i]->setPressedColor(QColor("#00C853"));
+        pbMinus[i]->setTextColor(Qt::white);
+        pbMinus[i]->setRadius(6);
+        pbMinus[i]->setPadding(10);
+        pbMinus[i]->setText("-");
+        pbMinus[i]->setCheckable(false);
+
+        pbMinus[i]->setMinimumSize(30,30);
+        pbMinus[i]->setMaximumSize(30,30);
+    }
+
     ui->pushButton_LR->setNormalColor(QColor("#00C853"));
-    ui->pushButton_LR->setHoverColor(QColor("#00C853"));
-    ui->pushButton_LR->setPressedColor(QColor("#00C853"));
+    //ui->pushButton_LR->setHoverColor(QColor("#00C853"));
+    ui->pushButton_LR->setPressedColor(QColor("gray"));
     ui->pushButton_LR->setCheckedColor(QColor("#E53935"));
     ui->pushButton_LR->setTextColor(Qt::white);
     ui->pushButton_LR->setRadius(12);
     ui->pushButton_LR->setIcon(QIcon(":/icons/resources/unmuted.svg"));
     //ui->pushButton_LR->setText("LR");
+    ui->pushButton_LR->setMinimumSize(35,35);
+    ui->pushButton_LR->setMaximumSize(35,35);
+
+
+    ui->pbarVol_LR->setSegmentCount(24);                // 24 gomos
+    ui->pbarVol_LR->setSegmentSpacing(2);
+    ui->pbarVol_LR->setRadius(6);
+    ui->pbarVol_LR->setPadding(6);
+    ui->pbarVol_LR->setTrackColor(QColor("#1f2124"));   // gomo vazio
+    ui->pbarVol_LR->setFillColor(QColor("#00C853"));    // gomo cheio
+    ui->pbarVol_LR->setBackgroundColor(Qt::transparent); //
+    ui->pbarVol_LR->setTextColor(Qt::white);
+    ui->pbarVol_LR->setTextVisible(false);              // se quiser o número, ligue
+
+
 
     for (uint8_t i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         buttons[i]->setIcon(QIcon(":/icons/resources/unmuted.svg"));
         buttons[i]->setCheckable(true);
         group->addButton(buttons[i], i);
         connect(titlesArray[i], SIGNAL(clicked(bool)), this, SLOT(changeTitle()));
+        buttons[i]->setMinimumSize(35,35);
+        buttons[i]->setMaximumSize(35,35);
     }
     connect(group, SIGNAL(idToggled(int,bool)), this, SLOT(onMuteToggled(int,bool)));
     connect(ui->pushButton_LR, SIGNAL(clicked(bool)), this, SLOT(onMuteToggledLR(bool)));
@@ -941,7 +1003,7 @@ void MainWindow::onMinusClicked()
 
 void MainWindow::onPlusClicked()
 {
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    ModernButton *btn = qobject_cast<ModernButton*>(sender());
     if (!btn) return;
 
     int idx = -1;

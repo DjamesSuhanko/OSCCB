@@ -17,9 +17,8 @@ public:
     void setRadius(int r)                 { m_radius  = r; update(); }
     void setPadding(int px)               { m_pad     = px; update(); }
 
-    // Layout do conteúdo
-    void setIconSizePx(int px);                 // define tamanho do ícone (quadrado)
-    void setSpacing(int px) { m_spacing = px; update(); } // espaço entre ícone e texto
+    void setIconSizePx(int px);
+    void setSpacing(int px) { m_spacing = px; update(); }
 
 protected:
     void paintEvent(QPaintEvent* e) override;
@@ -31,6 +30,10 @@ protected:
 #endif
     void leaveEvent(QEvent* e) override;
 
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent* e) override;
+    bool event(QEvent* ev) override; // trata touch também
+
 private:
     QColor m_normal  = QColor("#333333");
     QColor m_hover   = QColor("#444444");
@@ -39,8 +42,10 @@ private:
     QColor m_text    = Qt::white;
 
     int  m_radius  = 10;
-    int  m_pad     = 10;  // padding interno
-    int  m_iconPx  = 20;  // lado do ícone
-    int  m_spacing = 8;   // espaço entre ícone e texto
+    int  m_pad     = 10;
+    int  m_iconPx  = 20;
+    int  m_spacing = 8;
     bool m_hovering = false;
+
+    bool m_pressedActive = false; // <--- novo, corrige bug do pressed
 };
