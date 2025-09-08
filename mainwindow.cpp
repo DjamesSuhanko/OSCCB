@@ -127,6 +127,7 @@ MainWindow::MainWindow(QWidget *parent)
     sceneGroup->setExclusive(true);
     for (uint8_t i=0;i<NUMBER_OF_SCENES;i++){
         sceneGroup->addButton(pbTauArray[i]);
+
     }
     connect(sceneGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onSceneClicked(QAbstractButton*)));
 
@@ -994,6 +995,10 @@ void MainWindow::onMinusClicked()
         QSignalBlocker block(dials[idx]);
         dials[idx]->setValue(steps);
         lastDialArr[idx] = steps;
+
+        if (dials[idx]) {
+            dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+        }
     }
 
     const float perc = accumArr[idx] / 100.0f;
@@ -1023,11 +1028,19 @@ void MainWindow::onPlusClicked()
         QSignalBlocker block(dials[idx]);
         dials[idx]->setValue(steps);
         lastDialArr[idx] = steps;
+
+        if (dials[idx]) {
+            dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+        }
     }
 
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
-    if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
+    if (percBarsArray[idx]){
+        percBarsArray[idx]->setValue(int(std::lround(perc)));
+
+
+    }
 }
 
 void MainWindow::onSceneClicked(QAbstractButton* b)
@@ -1078,16 +1091,21 @@ void MainWindow::onPlusLRClicked()
         QSignalBlocker block(ui->dial_LR);
         ui->dial_LR->setValue(steps);
         lastDialLR = steps;
+        //ui->dial_LR->setValue(steps);
     }
 
     // atualiza UI (label e barra)
-    if (ui->labelPercent_LR)
+    if (ui->labelPercent_LR){
         ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
-    if (ui->pbarVol_LR)
+    }
+    if (ui->pbarVol_LR){
         ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+    }
 
     // throttle de envio
-    if (sendTimerLR) sendTimerLR->start();
+    if (sendTimerLR){
+        sendTimerLR->start();
+    }
 }
 
 MainWindow::~MainWindow()

@@ -4261,7 +4261,7 @@ color: white;
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_33">
              <item row="0" column="5">
-              <widget class="QPushButton" name="pb_TAU_5">
+              <widget class="ModernButton" name="pb_TAU_5">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
@@ -4291,7 +4291,7 @@ color: white;
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QPushButton" name="pb_TAU_1">
+              <widget class="ModernButton" name="pb_TAU_1">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
@@ -4321,7 +4321,7 @@ color: white;
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QPushButton" name="pb_TAU_0">
+              <widget class="ModernButton" name="pb_TAU_0">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
@@ -4351,7 +4351,7 @@ color: white;
               </widget>
              </item>
              <item row="0" column="3">
-              <widget class="QPushButton" name="pb_TAU_3">
+              <widget class="ModernButton" name="pb_TAU_3">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
@@ -4381,7 +4381,7 @@ color: white;
               </widget>
              </item>
              <item row="0" column="4">
-              <widget class="QPushButton" name="pb_TAU_4">
+              <widget class="ModernButton" name="pb_TAU_4">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
@@ -4411,7 +4411,7 @@ color: white;
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QPushButton" name="pb_TAU_2">
+              <widget class="ModernButton" name="pb_TAU_2">
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color: black;
