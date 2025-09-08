@@ -16,7 +16,9 @@
 #include <QGuiApplication>
 #include <QInputMethod>
 #include <QAbstractButton>
-// #include <titledialog.h> // (se não estiver usando, pode remover)
+#include <moderndial.h>
+#include <modernbutton.h>
+#include <modernprogressbar.h>
 
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
@@ -48,6 +50,9 @@ public slots:
     void onPlusClicked();
     void onMinusClicked();
 
+    void onPlusLRClicked();
+    void onMinusLRClicked();
+
 private slots:
     void updateMeterDecay();
     void onMuteToggled(int id, bool checked);
@@ -68,6 +73,11 @@ private slots:
     void onDialPressed();
     void onDialReleased();
     void flushFaderSend(int idx);
+
+    void onLRDialValueChanged(int v);
+    void onLRDialPressed();
+    void onLRDialReleased();
+    void flushLRFaderSend();
 
 private:
     Ui::MainWindow *ui;
@@ -102,11 +112,11 @@ private:
     QPushButton *titlesArray[NUMBER_OF_CHANNELS]{};
     QPushButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)
 
-    QPushButton *pbPlus[NUMBER_OF_CHANNELS]{};
-    QPushButton *pbMinus[NUMBER_OF_CHANNELS]{};
+    ModernButton *pbPlus[NUMBER_OF_CHANNELS]{};
+    ModernButton *pbMinus[NUMBER_OF_CHANNELS]{};
 
     QLabel *labelsPercentArray[NUMBER_OF_CHANNELS]{};
-    QProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
+    ModernProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
     QProgressBar*  meterBarsArray[NUMBER_OF_CHANNELS]{};
 
     QDial* dials[NUMBER_OF_CHANNELS]{};
@@ -121,6 +131,13 @@ private:
                    bool italic = false);
 
     bool startedMsgs = false;
+
+    // ---- LR fader (estado próprio) ----
+    int   lastDialLR = 0;
+    int   accumLR    = 0;       // 0..10000
+    float currentFaderLR = 0.0f;
+    bool  draggingLR = false;
+    QTimer* sendTimerLR = nullptr;
 };
 
 #endif // MAINWINDOW_H

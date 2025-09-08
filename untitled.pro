@@ -15,11 +15,17 @@ ANDROID_TARGET_SDK_VERSION = 35
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    modernbutton.cpp \
+    moderndial.cpp \
+    modernprogressbar.cpp \
     oscclient.cpp \
     titledialog.cpp
 
 HEADERS += \
     mainwindow.h \
+    modernbutton.h \
+    moderndial.h \
+    modernprogressbar.h \
     oscclient.h \
     titledialog.h
 
