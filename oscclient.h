@@ -16,6 +16,7 @@ public:
     QHostAddress targetAddress() const;
     quint16      targetPort()   const;
 
+
     // Abre/binda o socket local (porta 0 = efêmera)
     bool open(quint16 localPort = 0);
 
@@ -54,6 +55,10 @@ public:
     void subscribeMetersAllChannels();    // /meters/1 (ALL CHANNELS)
     void subscribeMetersLR();
 
+    bool isOpen() const;
+    void close();
+    void requestStatDump();
+
 signals:
     void oscMessageReceived(QString address, QVariantList args);
     void error(QString message);
@@ -70,6 +75,9 @@ private:
 
     // Parsing
     void parseDatagram(const QByteArray& d);
+
+    bool m_subMetersCh = false;
+    bool m_subMetersLR = false;
 
 private:
     QHostAddress m_addr{QHostAddress::Any};

@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
     // inicializa cache de mute enviado
     if (!s_lastMuteInit) {
         for (int i=0;i<NUMBER_OF_CHANNELS;++i) s_lastMuteSent[i] = -1;
@@ -73,15 +74,17 @@ MainWindow::MainWindow(QWidget *parent)
     osc = new OscClient(this);
     // osc->setTarget(QHostAddress("192.168.1.43"), 10024);
 
-    // ====== Liga arrays de widgets ======
+    //REF:DIAL ====== Liga arrays de widgets ======
     dials[0] = ui->dial_0; dials[1] = ui->dial_1; dials[2] = ui->dial_2; dials[3] = ui->dial_3;
     dials[4] = ui->dial_4; dials[5] = ui->dial_5; dials[6] = ui->dial_6; dials[7] = ui->dial_7;
 
+    //REF:MUTE
     buttons[0] = ui->pushButton_ch01; buttons[1] = ui->pushButton_ch02;
     buttons[2] = ui->pushButton_ch03; buttons[3] = ui->pushButton_ch04;
     buttons[4] = ui->pushButton_ch05; buttons[5] = ui->pushButton_ch06;
     buttons[6] = ui->pushButton_ch07; buttons[7] = ui->pushButton_ch08;
 
+    //REF:TITLE
     titlesArray[0] = ui->bTitleCH01; titlesArray[1] = ui->bTitleCH02;
     titlesArray[2] = ui->bTitleCH03; titlesArray[3] = ui->bTitleCH04;
     titlesArray[4] = ui->bTitleCH05; titlesArray[5] = ui->bTitleCH06;
@@ -101,18 +104,21 @@ MainWindow::MainWindow(QWidget *parent)
     labelsPercentArray[4] = ui->labelPercentCH05; labelsPercentArray[5] = ui->labelPercentCH06;
     labelsPercentArray[6] = ui->labelPercentCH07; labelsPercentArray[7] = ui->labelPercentCH08;
 
-    // Barras de VOLUME (fader em %) -> pbarVol_x
+    //REF:VOLUME Barras de VOLUME (fader em %) -> pbarVol_x
     percBarsArray[0] = ui->pbarVol_0; percBarsArray[1] = ui->pbarVol_1;
     percBarsArray[2] = ui->pbarVol_2; percBarsArray[3] = ui->pbarVol_3;
     percBarsArray[4] = ui->pbarVol_4; percBarsArray[5] = ui->pbarVol_5;
     percBarsArray[6] = ui->pbarVol_6; percBarsArray[7] = ui->pbarVol_7;
 
+    //REF:MAIS
     pbPlus[0] = ui->pbPlus_0; pbPlus[1] = ui->pbPlus_1; pbPlus[2] = ui->pbPlus_2; pbPlus[3] = ui->pbPlus_3;
     pbPlus[4] = ui->pbPlus_4; pbPlus[5] = ui->pbPlus_5; pbPlus[6] = ui->pbPlus_6; pbPlus[7] = ui->pbPlus_7;
 
+    //REF:MENOS
     pbMinus[0] = ui->pbMinus_0; pbMinus[1] = ui->pbMinus_1; pbMinus[2] = ui->pbMinus_2; pbMinus[3] = ui->pbMinus_3;
     pbMinus[4] = ui->pbMinus_4; pbMinus[5] = ui->pbMinus_5; pbMinus[6] = ui->pbMinus_6; pbMinus[7] = ui->pbMinus_7;
 
+    //REF:MENU
     pbTauArray[0] = ui->pb_TAU_0; pbTauArray[1] = ui->pb_TAU_1; pbTauArray[2] = ui->pb_TAU_2;
     pbTauArray[3] = ui->pb_TAU_3; pbTauArray[4] = ui->pb_TAU_4; pbTauArray[5] = ui->pb_TAU_5;
 
@@ -126,9 +132,21 @@ MainWindow::MainWindow(QWidget *parent)
     sceneGroup = new QButtonGroup(this);
     sceneGroup->setExclusive(true);
     for (uint8_t i=0;i<NUMBER_OF_SCENES;i++){
+        pbTauArray[i]->setNormalColor(QColor("#1e1e1e"));
+        //pbTauArray[i]->setHoverColor(QColor("gray"));
+        //pbTauArray[i]->setPressedColor(QColor("gray"));
+        pbTauArray[i]->setTextColor(Qt::white);
+        pbTauArray[i]->setCheckedColor(QColor("#00C853"));
+        pbTauArray[i]->setRadius(4);
+        pbTauArray[i]->setPadding(20);
+        pbTauArray[i]->setCheckable(true);
+
+
         sceneGroup->addButton(pbTauArray[i]);
+
     }
     connect(sceneGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onSceneClicked(QAbstractButton*)));
+
 
     // ----- Liga sinais do dial LR -----
     connect(ui->dial_LR, SIGNAL(valueChanged(int)), this, SLOT(onLRDialValueChanged(int)));
@@ -188,7 +206,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(pbMinus[i], SIGNAL(clicked()), this, SLOT(onMinusClicked()));
     }
 
-    // ====== Config INICIAL dos dials / buffers ======
+    //REF:DIAL ====== Config INICIAL dos dials / buffers ======
     for (int i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         dials[i]->setMinimum(0);
         dials[i]->setMaximum(999);      // 1 volta = 1000 passos
@@ -226,17 +244,18 @@ MainWindow::MainWindow(QWidget *parent)
         dragging[i] = false;
     }
 
+    //REF:OSC
     // ====== Bind UDP e descoberta ======
     QTimer::singleShot(0, this, [this]() {
-        if (!osc->open(12000)) {
-            appendLog("Falha ao abrir UDP local", "red", true, false);
+        if (!osc->open(LOCAL_PORT_BIND)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
+            appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
             return;
         }
 
         QTimer::singleShot(0, this, [this]() {
             const bool found = osc->setTargetFromDiscovery("192.168.1.0/24", 3500);
             if (!found) {
-                appendLog("Mixer não encontrado via scan; usando IP de entrada", "yellow", true, false);
+                appendLog("Mixer não encontrado via scan. Tentando IP de entrada...", "yellow", true, false);
                 osc->setTarget(QHostAddress(ui->lineEditIP->text()), 10024);
             } else {
                 qDebug() << "Mixer em" << osc->targetAddress() << osc->targetPort();
@@ -248,10 +267,11 @@ MainWindow::MainWindow(QWidget *parent)
             osc->subscribeMetersAllChannels();
             osc->subscribeMetersLR();
             osc->syncAll(NUMBER_OF_CHANNELS);   // GET inicial (fader+mute) dos canais
+
         });
     });
 
-    // ===================== TIMER ÚNICO DE UI PARA METERS =====================
+    //REF:METER ===================== TIMER ÚNICO DE UI PARA METERS =====================
     if (!g_uiMeterTimer) {
         g_uiMeterTimer = new QTimer(this);
         g_uiMeterTimer->setInterval(30);
@@ -314,7 +334,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // Meters (/meters/1) -> progressBar_X (NÃO pbarVol_X)
+                //REF:METER Meters (/meters/1) -> progressBar_X (NÃO pbarVol_X)
                 // ==========================================================
                 if (addr == QLatin1String("/meters/1") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -366,7 +386,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // Meters LR (/meters/3) -> progressBar_L / progressBar_R
+                //REF:METER Meters LR (/meters/3) -> progressBar_L / progressBar_R
                 // ==========================================================
                 if (addr == QLatin1String("/meters/3") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -418,7 +438,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // LR on/off (/lr/mix/on) -> pushButton_LR (ícone + check)
+                //REF:LR LR on/off (/lr/mix/on) -> pushButton_LR (ícone + check)
                 // ==========================================================
                 if (addr == QLatin1String("/lr/mix/on") && !args.isEmpty()) {
                     const int on = args.first().toInt();
@@ -528,15 +548,20 @@ MainWindow::MainWindow(QWidget *parent)
                         }
                         // ÍCONE **NÃO** é alterado aqui (fica sob controle dos handlers de UI)
                     }
+                    //REF:LR
+                    // if (ui->pushButton_LR->isChecked() != shouldChecked){
+                    //     QSignalBlocker blockLR(ui->pushButton_LR);
+                    //     ui->pushButton_LR->setChecked(shouldChecked);
+                    // }
                     return;
                 }
             });
 
-    // ====== Timer de decay do meter global (se ainda usa essa barra separada) ======
+    // ====== Timer de decay do meter global  ======
     connect(&meterDecayTimer, &QTimer::timeout, this, &MainWindow::updateMeterDecay);
     meterDecayTimer.start(30);
 
-    // ====== Grupo de mute por canal ======
+    //REF:MUTE ====== Grupo de mute por canal ======
     group = new QButtonGroup(this);
     group->setExclusive(false);
 
@@ -597,28 +622,16 @@ MainWindow::MainWindow(QWidget *parent)
         pbMinus[i]->setMaximumSize(30,30);
     }
 
-    ui->pushButton_LR->setNormalColor(QColor("#00C853"));
-    //ui->pushButton_LR->setHoverColor(QColor("#00C853"));
-    ui->pushButton_LR->setPressedColor(QColor("gray"));
-    ui->pushButton_LR->setCheckedColor(QColor("#E53935"));
+    ui->pushButton_LR->setNormalColor(QColor("#E53935"));
+    ui->pushButton_LR->setHoverColor(QColor("#00C853"));
+    ui->pushButton_LR->setPressedColor(QColor("#00C853"));
+    ui->pushButton_LR->setCheckedColor(QColor("#00C853"));
     ui->pushButton_LR->setTextColor(Qt::white);
     ui->pushButton_LR->setRadius(12);
     ui->pushButton_LR->setIcon(QIcon(":/icons/resources/unmuted.svg"));
     //ui->pushButton_LR->setText("LR");
     ui->pushButton_LR->setMinimumSize(35,35);
     ui->pushButton_LR->setMaximumSize(35,35);
-
-
-    ui->pbarVol_LR->setSegmentCount(24);                // 24 gomos
-    ui->pbarVol_LR->setSegmentSpacing(2);
-    ui->pbarVol_LR->setRadius(6);
-    ui->pbarVol_LR->setPadding(6);
-    ui->pbarVol_LR->setTrackColor(QColor("#1f2124"));   // gomo vazio
-    ui->pbarVol_LR->setFillColor(QColor("#00C853"));    // gomo cheio
-    ui->pbarVol_LR->setBackgroundColor(Qt::transparent); //
-    ui->pbarVol_LR->setTextColor(Qt::white);
-    ui->pbarVol_LR->setTextVisible(false);              // se quiser o número, ligue
-
 
 
     for (uint8_t i = 0; i < NUMBER_OF_CHANNELS; ++i) {
@@ -637,6 +650,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Carrega labels persistidas
     loadChannelLabels();
+
+    connect(ui->pbConnect,SIGNAL(clicked(bool)),this,SLOT(onConnectButton()));
+
 }
 
 // ====== LR: ACUMULADOR (10 voltas = 100%) ======
@@ -701,7 +717,7 @@ void MainWindow::flushLRFaderSend()
 
 void MainWindow::onMuteToggledLR(bool)
 {
-    const bool muted = ui->pushButton_LR->isChecked();
+    const bool muted = !ui->pushButton_LR->isChecked();
 
     // Atualiza ícone (igual já fazia)
     ui->pushButton_LR->setIcon(QIcon(muted
@@ -840,6 +856,36 @@ void MainWindow::onDialValueChanged(int v)
 
     // Sempre agenda envio com throttle (~30 Hz), mesmo arrastando
     if (sendTimers[idx]) sendTimers[idx]->start();
+}
+
+void MainWindow::onConnectButton()
+{
+    osc->close();
+    QTimer::singleShot(0, this, [this]() {
+        if (!osc->open(LOCAL_PORT_BIND)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
+            appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
+            return;
+        }
+
+        QTimer::singleShot(0, this, [this]() {
+            const bool found = osc->setTargetFromDiscovery("192.168.1.0/24", 3500);
+            if (!found) {
+                appendLog("Mixer não encontrado via scan. Tentando IP de entrada...", "yellow", true, false);
+                osc->setTarget(QHostAddress(ui->lineEditIP->text()), ui->lineEditPort->text().toInt());
+            } else {
+                qDebug() << "Mixer em" << osc->targetAddress() << osc->targetPort();
+                appendLog("Mixer em " + osc->targetAddress().toString().toUtf8(), "cyan", false, true);
+            }
+            osc->queryName();
+
+            osc->startFeedbackKeepAlive(5000);
+            osc->subscribeMetersAllChannels();
+            osc->subscribeMetersLR();
+            osc->syncAll(NUMBER_OF_CHANNELS);   // GET inicial (fader+mute) dos canais
+
+        });
+    });
+
 }
 
 void MainWindow::onDialPressed()
@@ -994,6 +1040,10 @@ void MainWindow::onMinusClicked()
         QSignalBlocker block(dials[idx]);
         dials[idx]->setValue(steps);
         lastDialArr[idx] = steps;
+
+        if (dials[idx]) {
+            dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+        }
     }
 
     const float perc = accumArr[idx] / 100.0f;
@@ -1023,11 +1073,19 @@ void MainWindow::onPlusClicked()
         QSignalBlocker block(dials[idx]);
         dials[idx]->setValue(steps);
         lastDialArr[idx] = steps;
+
+        if (dials[idx]) {
+            dials[idx]->setProperty("progress01", currentFaderArr[idx]);
+        }
     }
 
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
-    if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
+    if (percBarsArray[idx]){
+        percBarsArray[idx]->setValue(int(std::lround(perc)));
+
+
+    }
 }
 
 void MainWindow::onSceneClicked(QAbstractButton* b)
@@ -1078,16 +1136,21 @@ void MainWindow::onPlusLRClicked()
         QSignalBlocker block(ui->dial_LR);
         ui->dial_LR->setValue(steps);
         lastDialLR = steps;
+        //ui->dial_LR->setValue(steps);
     }
 
     // atualiza UI (label e barra)
-    if (ui->labelPercent_LR)
+    if (ui->labelPercent_LR){
         ui->labelPercent_LR->setText(QString::number(currentFaderLR, 'f', 4));
-    if (ui->pbarVol_LR)
+    }
+    if (ui->pbarVol_LR){
         ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
+    }
 
     // throttle de envio
-    if (sendTimerLR) sendTimerLR->start();
+    if (sendTimerLR){
+        sendTimerLR->start();
+    }
 }
 
 MainWindow::~MainWindow()

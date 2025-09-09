@@ -105,7 +105,11 @@ void OscClient::setMainLRFader(float v01) {
 void OscClient::setMainLRMute(bool on) {
     send(QStringLiteral("/lr/mix/on"), "i", { packInt32(on ? 1 : 0) });
 }
-void OscClient::getMainLRFader() { send(QStringLiteral("/lr/mix/fader"), "s", { packString("?") }); }
+void OscClient::getMainLRFader() {
+    const QString path = QStringLiteral("/lr/mix/fader");
+    send(path, "s", { packString("?") });
+    //send(QStringLiteral(""), "s", { packString("?") });
+}
 void OscClient::getMainLRMute()  { send(QStringLiteral("/lr/mix/on"),    "s", { packString("?") }); }
 
 // --------- RX helpers ----------
@@ -469,10 +473,31 @@ void OscClient::syncAll(int channels) {
 
 // --------- Meters subscribe helper ----------
 void OscClient::subscribeMetersAllChannels() {
-    send(QStringLiteral("/meters"), "si",
-         { packString(QStringLiteral("/meters/1")), packInt32(0) });
+    if (m_subMetersCh) return;
+    m_subMetersCh = true;
+    send(QStringLiteral("/meters"), "si", { packString("/meters/1"), packInt32(0) });
 }
 void OscClient::subscribeMetersLR() {
-    send(QStringLiteral("/meters"), "si",
-         { packString(QStringLiteral("/meters/3")), packInt32(0) });
+    if (m_subMetersLR) return;
+    m_subMetersLR = true;
+    send(QStringLiteral("/meters"), "si", { packString("/meters/3"), packInt32(0) });
 }
+
+bool OscClient::isOpen() const {
+    return m_sock.state() == QAbstractSocket::BoundState;
+}
+void OscClient::close() {
+//     stopFeedbackKeepAlive();
+//     if (m_sock.state() == QAbstractSocket::BoundState) {
+//         m_sock.close();
+//     }
+    stopFeedbackKeepAlive();
+    m_subMetersCh = m_subMetersLR = false;
+    if (m_sock.state() == QAbstractSocket::BoundState) m_sock.close();
+ }
+
+void OscClient::requestStatDump() {
+    // envia /-stat/dump sem args
+    send(QStringLiteral("/-stat/dump"), QByteArray(), {});
+}
+
