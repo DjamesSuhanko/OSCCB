@@ -90,270 +90,8 @@ border: 0px;</string>
                 <string/>
                </property>
                <layout class="QGridLayout" name="gridLayout_61">
-                <item row="2" column="0">
-                 <layout class="QGridLayout" name="gridLayout_57">
-                  <item row="0" column="0">
-                   <layout class="QGridLayout" name="gridLayout_32">
-                    <item row="1" column="4">
-                     <widget class="QPushButton" name="pbConnect">
-                      <property name="minimumSize">
-                       <size>
-                        <width>72</width>
-                        <height>35</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-    background-color: black;
-    color: gray;
-    border: 1px solid rgb(80,80,80);      /* opcional: força borda */
-   border-radius: 4px;   /* quanto maior o número, mais arredondado */
-
-}
-
-QPushButton:pressed {
-    background-color: #00ff00;    /* verde escuro ao pressionar (opcional) */
-}
-
-QPushButton:checked {
-background-color: #00d619;
-  border: 3px solid #00ff1e;
-color: white;
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>Conectar</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="3">
-                     <spacer name="horizontalSpacer_86">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item row="1" column="6">
-                     <spacer name="horizontalSpacer_99">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item row="1" column="1">
-                     <spacer name="horizontalSpacer_85">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLineEdit" name="lineEditIP">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>35</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>150</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">  border: 1px solid rgb(80,80,80);
-  border-radius: 4px;
-  background: #1f2125;
-color: gray;
-</string>
-                      </property>
-                      <property name="text">
-                       <string>192.168.1.43</string>
-                      </property>
-                      <property name="maxLength">
-                       <number>16</number>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="5">
-                     <spacer name="horizontalSpacer_98">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item row="1" column="2">
-                     <widget class="QLineEdit" name="lineEditPort">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>35</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>150</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">  border: 1px solid rgb(80,80,80);
-  border-radius: 4px;
-  background: #1f2125;
-color: gray;
-</string>
-                      </property>
-                      <property name="text">
-                       <string>10024</string>
-                      </property>
-                      <property name="maxLength">
-                       <number>16</number>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_10">
-                      <property name="text">
-                       <string>IP do Mixer</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="2">
-                     <widget class="QLabel" name="label_11">
-                      <property name="text">
-                       <string>Porta do Mixer</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="0" column="4">
-                   <spacer name="horizontalSpacer_44">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="1">
-                   <layout class="QGridLayout" name="gridLayout_62"/>
-                  </item>
-                  <item row="0" column="3">
-                   <spacer name="horizontalSpacer_82">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="5">
-                   <widget class="QPushButton" name="pushButtonProfile">
-                    <property name="minimumSize">
-                     <size>
-                      <width>72</width>
-                      <height>35</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QPushButton {
-    background-color: black;
-    color: gray;
-    border: 1px solid rgb(80,80,80);      /* opcional: força borda */
-   border-radius: 4px;   /* quanto maior o número, mais arredondado */
-
-}
-
-QPushButton:pressed {
-    background-color: #00ff00;    /* verde escuro ao pressionar (opcional) */
-}
-
-QPushButton:checked {
-background-color: #00d619;
-  border: 3px solid #00ff1e;
-color: white;
-}
-</string>
-                    </property>
-                    <property name="text">
-                     <string> Gravar perfil </string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
-                   <spacer name="horizontalSpacer_94">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item row="1" column="0">
-                 <spacer name="verticalSpacer_11">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
+                <item row="4" column="0">
+                 <layout class="QGridLayout" name="gridLayout_57"/>
                 </item>
                 <item row="0" column="0">
                  <widget class="QTabWidget" name="tabWidget">
@@ -368,6 +106,72 @@ color: white;
                     <string>Faders</string>
                    </attribute>
                    <layout class="QGridLayout" name="gridLayout_68">
+                    <item row="1" column="0">
+                     <spacer name="verticalSpacer">
+                      <property name="orientation">
+                       <enum>Qt::Orientation::Vertical</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Policy::Expanding</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>2000</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item row="2" column="0">
+                     <layout class="QGridLayout" name="gridLayout_52">
+                      <item row="1" column="1">
+                       <widget class="QPushButton" name="pushButtonProfile">
+                        <property name="minimumSize">
+                         <size>
+                          <width>72</width>
+                          <height>35</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid rgb(80,80,80);      /* opcional: força borda */
+   border-radius: 4px;   /* quanto maior o número, mais arredondado */
+
+}
+
+QPushButton:pressed {
+    background-color: #00ff00;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00d619;
+  border: 3px solid #00ff1e;
+color: white;
+}
+</string>
+                        </property>
+                        <property name="text">
+                         <string> Gravar perfil </string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <spacer name="horizontalSpacer_104">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
                     <item row="0" column="0">
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
                       <item>
@@ -392,111 +196,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <bool>false</bool>
                         </property>
                         <layout class="QGridLayout" name="gridLayout">
-                         <item row="0" column="0">
-                          <layout class="QVBoxLayout" name="verticalLayout_2">
-                           <item>
-                            <layout class="QGridLayout" name="gridLayout_48">
-                             <item row="0" column="0">
-                              <spacer name="horizontalSpacer_76">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item row="0" column="2">
-                              <spacer name="horizontalSpacer_77">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item row="0" column="1">
-                              <widget class="QPushButton" name="bTitleCH01">
-                               <property name="font">
-                                <font>
-                                 <fontweight>Black</fontweight>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: transparent;
-color: white;
-border: 0px;</string>
-                               </property>
-                               <property name="text">
-                                <string>IRMÃS</string>
-                               </property>
-                               <property name="flat">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="label">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;</string>
-                             </property>
-                             <property name="text">
-                              <string>CANAL 1</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="ModernProgressBar" name="pbarVol_0">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
                          <item row="1" column="0">
-                          <spacer name="verticalSpacer_10">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_12">
                            <item>
                             <layout class="QVBoxLayout" name="verticalLayout">
@@ -802,6 +502,97 @@ QPushButton:checked {
                            </item>
                           </layout>
                          </item>
+                         <item row="0" column="0">
+                          <layout class="QVBoxLayout" name="verticalLayout_2">
+                           <item>
+                            <layout class="QGridLayout" name="gridLayout_48">
+                             <item row="0" column="0">
+                              <spacer name="horizontalSpacer_76">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item row="0" column="2">
+                              <spacer name="horizontalSpacer_77">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QPushButton" name="bTitleCH01">
+                               <property name="font">
+                                <font>
+                                 <fontweight>Black</fontweight>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                               </property>
+                               <property name="text">
+                                <string>IRMÃS</string>
+                               </property>
+                               <property name="flat">
+                                <bool>true</bool>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="label">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: white;
+border: 0px;</string>
+                             </property>
+                             <property name="text">
+                              <string>CANAL 1</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="ModernProgressBar" name="pbarVol_0">
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -838,19 +629,6 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                         </property>
                         <layout class="QGridLayout" name="gridLayout_2">
                          <item row="1" column="0">
-                          <spacer name="verticalSpacer_9">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_11">
                            <item>
                             <layout class="QGridLayout" name="gridLayout_10">
@@ -1259,19 +1037,6 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                         </property>
                         <layout class="QGridLayout" name="gridLayout_3">
                          <item row="1" column="0">
-                          <spacer name="verticalSpacer_8">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_10">
                            <item>
                             <layout class="QGridLayout" name="gridLayout_13">
@@ -1679,19 +1444,6 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                         </property>
                         <layout class="QGridLayout" name="gridLayout_4">
                          <item row="1" column="0">
-                          <spacer name="verticalSpacer_7">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_9">
                            <item>
                             <layout class="QGridLayout" name="gridLayout_17">
@@ -2098,20 +1850,99 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <string/>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_5">
-                         <item row="1" column="0">
-                          <spacer name="verticalSpacer_6">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
+                         <item row="0" column="0">
+                          <layout class="QGridLayout" name="gridLayout_51">
+                           <item row="0" column="0">
+                            <layout class="QGridLayout" name="gridLayout_47">
+                             <item row="0" column="2">
+                              <spacer name="horizontalSpacer_75">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QPushButton" name="bTitleCH05">
+                               <property name="font">
+                                <font>
+                                 <fontweight>Black</fontweight>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                               </property>
+                               <property name="text">
+                                <string>SEM FIO</string>
+                               </property>
+                               <property name="flat">
+                                <bool>true</bool>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="0">
+                              <spacer name="horizontalSpacer_74">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                            </layout>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="ModernProgressBar" name="pbarVol_4">
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_6">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: white;
+border: 0px;
+</string>
+                             </property>
+                             <property name="text">
+                              <string>CANAL 5</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
                          </item>
-                         <item row="2" column="0">
+                         <item row="1" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_8">
                            <item>
                             <layout class="QGridLayout" name="gridLayout_21">
@@ -2393,98 +2224,6 @@ QPushButton:checked {
                            </item>
                           </layout>
                          </item>
-                         <item row="0" column="0">
-                          <layout class="QGridLayout" name="gridLayout_51">
-                           <item row="0" column="0">
-                            <layout class="QGridLayout" name="gridLayout_47">
-                             <item row="0" column="2">
-                              <spacer name="horizontalSpacer_75">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item row="0" column="1">
-                              <widget class="QPushButton" name="bTitleCH05">
-                               <property name="font">
-                                <font>
-                                 <fontweight>Black</fontweight>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: transparent;
-color: white;
-border: 0px;</string>
-                               </property>
-                               <property name="text">
-                                <string>SEM FIO</string>
-                               </property>
-                               <property name="flat">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="0" column="0">
-                              <spacer name="horizontalSpacer_74">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                            </layout>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_4">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="label_6">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;
-</string>
-                             </property>
-                             <property name="text">
-                              <string>CANAL 5</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -2611,7 +2350,7 @@ border: 0px;
                            </item>
                           </layout>
                          </item>
-                         <item row="3" column="0">
+                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_7">
                            <item>
                             <layout class="QGridLayout" name="gridLayout_25">
@@ -2893,19 +2632,6 @@ QPushButton:checked {
                            </item>
                           </layout>
                          </item>
-                         <item row="2" column="0">
-                          <spacer name="verticalSpacer_5">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -2946,7 +2672,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <string/>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_7">
-                         <item row="3" column="0">
+                         <item row="2" column="0">
                           <layout class="QHBoxLayout" name="horizontalLayout_6">
                            <item>
                             <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -3320,19 +3046,6 @@ border: 0px;
                            </item>
                           </layout>
                          </item>
-                         <item row="1" column="0">
-                          <spacer name="verticalSpacer_3">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -3379,7 +3092,7 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <property name="rightMargin">
                           <number>9</number>
                          </property>
-                         <item row="4" column="1">
+                         <item row="3" column="1">
                           <layout class="QHBoxLayout" name="horizontalLayout_5">
                            <item>
                             <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -3753,19 +3466,6 @@ border: 0px;
                            </item>
                           </layout>
                          </item>
-                         <item row="1" column="1">
-                          <spacer name="verticalSpacer_4">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -3812,7 +3512,99 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <property name="rightMargin">
                           <number>9</number>
                          </property>
-                         <item row="4" column="1">
+                         <item row="0" column="1">
+                          <layout class="QGridLayout" name="gridLayout_64">
+                           <item row="2" column="0">
+                            <widget class="ModernProgressBar" name="pbarVol_LR">
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="0">
+                            <layout class="QGridLayout" name="gridLayout_65">
+                             <item row="0" column="2">
+                              <spacer name="horizontalSpacer_91">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item row="0" column="0">
+                              <spacer name="horizontalSpacer_92">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QPushButton" name="bTitle_LR">
+                               <property name="font">
+                                <font>
+                                 <fontweight>Black</fontweight>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                               </property>
+                               <property name="text">
+                                <string>MASTER</string>
+                               </property>
+                               <property name="flat">
+                                <bool>true</bool>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_9">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: white;
+border: 0px;
+</string>
+                             </property>
+                             <property name="text">
+                              <string>L/R</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="3" column="1">
                           <layout class="QHBoxLayout" name="horizontalLayout_14">
                            <item>
                             <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -4126,111 +3918,6 @@ QPushButton:checked {
                            </item>
                           </layout>
                          </item>
-                         <item row="0" column="1">
-                          <layout class="QGridLayout" name="gridLayout_64">
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_LR">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="0">
-                            <layout class="QGridLayout" name="gridLayout_65">
-                             <item row="0" column="2">
-                              <spacer name="horizontalSpacer_91">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item row="0" column="0">
-                              <spacer name="horizontalSpacer_92">
-                               <property name="orientation">
-                                <enum>Qt::Orientation::Horizontal</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>40</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                             <item row="0" column="1">
-                              <widget class="QPushButton" name="bTitle_LR">
-                               <property name="font">
-                                <font>
-                                 <fontweight>Black</fontweight>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: transparent;
-color: white;
-border: 0px;</string>
-                               </property>
-                               <property name="text">
-                                <string>MASTER</string>
-                               </property>
-                               <property name="flat">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="label_9">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;
-</string>
-                             </property>
-                             <property name="text">
-                              <string>L/R</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item row="1" column="1">
-                          <spacer name="verticalSpacer_12">
-                           <property name="orientation">
-                            <enum>Qt::Orientation::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -4243,6 +3930,309 @@ border: 0px;
                     <string>Logs</string>
                    </attribute>
                    <layout class="QGridLayout" name="gridLayout_67">
+                    <item row="2" column="0">
+                     <layout class="QGridLayout" name="gridLayout_32">
+                      <item row="2" column="7">
+                       <spacer name="horizontalSpacer_102">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="13">
+                       <spacer name="horizontalSpacer_44">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="16">
+                       <spacer name="horizontalSpacer_94">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="10">
+                       <spacer name="horizontalSpacer_97">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="5">
+                       <widget class="QPushButton" name="pbConnect">
+                        <property name="minimumSize">
+                         <size>
+                          <width>72</width>
+                          <height>35</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>100</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid rgb(80,80,80);      /* opcional: força borda */
+   border-radius: 4px;   /* quanto maior o número, mais arredondado */
+
+}
+
+QPushButton:pressed {
+    background-color: #00ff00;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00d619;
+  border: 3px solid #00ff1e;
+color: white;
+}
+</string>
+                        </property>
+                        <property name="text">
+                         <string>Conectar</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_10">
+                        <property name="text">
+                         <string>IP do Mixer</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="3">
+                       <spacer name="horizontalSpacer_86">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="9">
+                       <spacer name="horizontalSpacer_100">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="15">
+                       <spacer name="horizontalSpacer_99">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="1">
+                       <spacer name="horizontalSpacer_85">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="8">
+                       <spacer name="horizontalSpacer_101">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="17">
+                       <spacer name="horizontalSpacer_82">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="11">
+                       <spacer name="horizontalSpacer_96">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="0" column="2">
+                       <widget class="QLabel" name="label_11">
+                        <property name="text">
+                         <string>Porta do Mixer</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLineEdit" name="lineEditIP">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>35</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>150</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">  border: 1px solid rgb(80,80,80);
+  border-radius: 4px;
+  background: #1f2125;
+color: gray;
+</string>
+                        </property>
+                        <property name="text">
+                         <string>192.168.1.43</string>
+                        </property>
+                        <property name="maxLength">
+                         <number>16</number>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignmentFlag::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="12">
+                       <spacer name="horizontalSpacer_95">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="14">
+                       <spacer name="horizontalSpacer_98">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="2">
+                       <widget class="QLineEdit" name="lineEditPort">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>35</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>150</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">  border: 1px solid rgb(80,80,80);
+  border-radius: 4px;
+  background: #1f2125;
+color: gray;
+</string>
+                        </property>
+                        <property name="text">
+                         <string>10024</string>
+                        </property>
+                        <property name="maxLength">
+                         <number>16</number>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignmentFlag::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="6">
+                       <spacer name="horizontalSpacer_103">
+                        <property name="orientation">
+                         <enum>Qt::Orientation::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
                     <item row="0" column="0">
                      <widget class="QTextEdit" name="textEdit">
                       <property name="styleSheet">
@@ -4255,7 +4245,30 @@ border: 1px solid rgb(80, 80, 80);  ;</string>
                       </property>
                      </widget>
                     </item>
+                    <item row="1" column="0">
+                     <spacer name="verticalSpacer_11">
+                      <property name="orientation">
+                       <enum>Qt::Orientation::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
                    </layout>
+                  </widget>
+                  <widget class="QWidget" name="tabConfig">
+                   <attribute name="title">
+                    <string>Config</string>
+                   </attribute>
+                  </widget>
+                  <widget class="QWidget" name="tabAjuda">
+                   <attribute name="title">
+                    <string>Ajuda</string>
+                   </attribute>
                   </widget>
                  </widget>
                 </item>

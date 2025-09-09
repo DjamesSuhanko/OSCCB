@@ -24,6 +24,7 @@
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
 #define PROFILE_INI "profiles.ini"
+#define LOCAL_PORT_BIND 12000
 
 // Caminho do INI
 static QString profilesIniPath() {

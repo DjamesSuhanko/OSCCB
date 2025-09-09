@@ -247,7 +247,7 @@ MainWindow::MainWindow(QWidget *parent)
     //REF:OSC
     // ====== Bind UDP e descoberta ======
     QTimer::singleShot(0, this, [this]() {
-        if (!osc->open(12000)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
+        if (!osc->open(LOCAL_PORT_BIND)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
             appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
             return;
         }
@@ -255,7 +255,7 @@ MainWindow::MainWindow(QWidget *parent)
         QTimer::singleShot(0, this, [this]() {
             const bool found = osc->setTargetFromDiscovery("192.168.1.0/24", 3500);
             if (!found) {
-                appendLog("Mixer não encontrado via scan; usando IP de entrada", "yellow", true, false);
+                appendLog("Mixer não encontrado via scan. Tentando IP de entrada...", "yellow", true, false);
                 osc->setTarget(QHostAddress(ui->lineEditIP->text()), 10024);
             } else {
                 qDebug() << "Mixer em" << osc->targetAddress() << osc->targetPort();
@@ -646,6 +646,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Carrega labels persistidas
     loadChannelLabels();
 
+    connect(ui->pbConnect,SIGNAL(clicked(bool)),this,SLOT(onConnectButton()));
+
 }
 
 // ====== LR: ACUMULADOR (10 voltas = 100%) ======
@@ -853,57 +855,33 @@ void MainWindow::onDialValueChanged(int v)
 
 void MainWindow::onConnectButton()
 {
-    // 1) Normaliza IP/porta
-    const QString ipText  = ui->lineEditIP->text().trimmed();
-    const int     port    = qMax(1, ui->lineEditPort->text().toInt()); // porta >0
-    const int     oscPort = (port == 0 ? 10024 : port);                // padrão X AIR
-
-    if (ipText.isEmpty()) {
-        appendLog("IP vazio. Informe o endereço do mixer.", "red", true, false);
-        return;
-    }
-
-    // 2) Abre/binda a porta local (do app) — idempotente
-    if (!osc->isOpen()) {
-        if (!osc->open(12000)) { // porta LOCAL do app
+    osc->close();
+    QTimer::singleShot(0, this, [this]() {
+        if (!osc->open(LOCAL_PORT_BIND)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
             appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
             return;
         }
-    }
 
-    // 3) Define o alvo
-    osc->setTarget(QHostAddress(ipText), oscPort);
-    appendLog("Conexão iniciada pelo usuário", "yellow", false, true);
-    appendLog("Mixer em " + osc->targetAddress().toString().toUtf8()
-                  + " porta " + QByteArray::number(oscPort),
-              "cyan", false, true);
+        QTimer::singleShot(0, this, [this]() {
+            const bool found = osc->setTargetFromDiscovery("192.168.1.0/24", 3500);
+            if (!found) {
+                appendLog("Mixer não encontrado via scan. Tentando IP de entrada...", "yellow", true, false);
+                osc->setTarget(QHostAddress(ui->lineEditIP->text()), ui->lineEditPort->text().toInt());
+            } else {
+                qDebug() << "Mixer em" << osc->targetAddress() << osc->targetPort();
+                appendLog("Mixer em " + osc->targetAddress().toString().toUtf8(), "cyan", false, true);
+            }
+            osc->queryName();
 
-    // 4) Identificação (opcional, só para logar modelo/fw)
-    osc->queryName(); // /xinfo
+            osc->startFeedbackKeepAlive(5000);
+            osc->subscribeMetersAllChannels();
+            osc->subscribeMetersLR();
+            osc->syncAll(NUMBER_OF_CHANNELS);   // GET inicial (fader+mute) dos canais
 
-    // 5) Registro de feedback ("/xremote") com renovação periódica
-    //    (se seu OscClient já se protege de múltiplas chamadas, ótimo;
-    //     senão, pare o anterior antes de iniciar outro)
-    osc->startFeedbackKeepAlive(5000);
+        });
+    });
 
-    // 6) Assina meters (canais e LR)
-    //    Garanta que estes métodos sejam idempotentes (não duplicar assinaturas).
-    osc->subscribeMetersAllChannels(); // geralmente /meters/1
-    osc->subscribeMetersLR();          // geralmente /meters/3
-
-    // 7) GET inicial dos canais (fader+mute)
-    osc->syncAll(NUMBER_OF_CHANNELS);
-
-    // 8) ***FALTAVA***: GET inicial do LR (fader e mute)
-    //    Use helpers se existirem; caso contrário mande GET “cru”.
-    //    Ex.: osc->getMainLRFader(); osc->getMainLRMute();
-    //osc->sendGet(QStringLiteral("/lr/mix/fader"));
-    //osc->sendGet(QStringLiteral("/lr/mix/on"));
-
-    // 9) (Opcional) Dump total para “forçar” estado completo
-    // osc->requestStatDump(); // se implementado (ex. "/-stat/dump")
 }
-
 
 void MainWindow::onDialPressed()
 {
