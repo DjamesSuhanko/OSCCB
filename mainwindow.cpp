@@ -548,6 +548,11 @@ MainWindow::MainWindow(QWidget *parent)
                         }
                         // ÍCONE **NÃO** é alterado aqui (fica sob controle dos handlers de UI)
                     }
+                    //REF:LR
+                    // if (ui->pushButton_LR->isChecked() != shouldChecked){
+                    //     QSignalBlocker blockLR(ui->pushButton_LR);
+                    //     ui->pushButton_LR->setChecked(shouldChecked);
+                    // }
                     return;
                 }
             });
@@ -617,10 +622,10 @@ MainWindow::MainWindow(QWidget *parent)
         pbMinus[i]->setMaximumSize(30,30);
     }
 
-    ui->pushButton_LR->setNormalColor(QColor("#00C853"));
-    //ui->pushButton_LR->setHoverColor(QColor("#00C853"));
-    ui->pushButton_LR->setPressedColor(QColor("gray"));
-    ui->pushButton_LR->setCheckedColor(QColor("#E53935"));
+    ui->pushButton_LR->setNormalColor(QColor("#E53935"));
+    ui->pushButton_LR->setHoverColor(QColor("#00C853"));
+    ui->pushButton_LR->setPressedColor(QColor("#00C853"));
+    ui->pushButton_LR->setCheckedColor(QColor("#00C853"));
     ui->pushButton_LR->setTextColor(Qt::white);
     ui->pushButton_LR->setRadius(12);
     ui->pushButton_LR->setIcon(QIcon(":/icons/resources/unmuted.svg"));
@@ -712,7 +717,7 @@ void MainWindow::flushLRFaderSend()
 
 void MainWindow::onMuteToggledLR(bool)
 {
-    const bool muted = ui->pushButton_LR->isChecked();
+    const bool muted = !ui->pushButton_LR->isChecked();
 
     // Atualiza ícone (igual já fazia)
     ui->pushButton_LR->setIcon(QIcon(muted
