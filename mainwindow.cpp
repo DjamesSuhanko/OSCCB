@@ -110,6 +110,7 @@ MainWindow::MainWindow(QWidget *parent)
     percBarsArray[4] = ui->pbarVol_4; percBarsArray[5] = ui->pbarVol_5;
     percBarsArray[6] = ui->pbarVol_6; percBarsArray[7] = ui->pbarVol_7;
 
+
     //REF:MAIS
     pbPlus[0] = ui->pbPlus_0; pbPlus[1] = ui->pbPlus_1; pbPlus[2] = ui->pbPlus_2; pbPlus[3] = ui->pbPlus_3;
     pbPlus[4] = ui->pbPlus_4; pbPlus[5] = ui->pbPlus_5; pbPlus[6] = ui->pbPlus_6; pbPlus[7] = ui->pbPlus_7;

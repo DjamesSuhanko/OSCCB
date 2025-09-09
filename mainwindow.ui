@@ -132,6 +132,12 @@ border: 0px;</string>
                           <height>35</height>
                          </size>
                         </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>35</height>
+                         </size>
+                        </property>
                         <property name="styleSheet">
                          <string notr="true">QPushButton {
     background-color: black;
@@ -153,7 +159,7 @@ color: white;
 </string>
                         </property>
                         <property name="text">
-                         <string> Gravar perfil </string>
+                         <string> GRAVAR ESTADOS DOS MICS </string>
                         </property>
                        </widget>
                       </item>
@@ -169,6 +175,13 @@ color: white;
                          </size>
                         </property>
                        </spacer>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLabel" name="label_12">
+                        <property name="text">
+                         <string>Escolha o perfil no topo</string>
+                        </property>
+                       </widget>
                       </item>
                      </layout>
                     </item>
@@ -576,6 +589,11 @@ border: 0px;</string>
                            </item>
                            <item>
                             <widget class="ModernProgressBar" name="pbarVol_0">
+                             <property name="font">
+                              <font>
+                               <fontweight>ExtraBold</fontweight>
+                              </font>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">  border: 1px solid #cyan;
   border-radius: 4px;
