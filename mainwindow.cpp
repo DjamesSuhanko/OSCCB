@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
     // inicializa cache de mute enviado
     if (!s_lastMuteInit) {
         for (int i=0;i<NUMBER_OF_CHANNELS;++i) s_lastMuteSent[i] = -1;
@@ -73,15 +74,17 @@ MainWindow::MainWindow(QWidget *parent)
     osc = new OscClient(this);
     // osc->setTarget(QHostAddress("192.168.1.43"), 10024);
 
-    // ====== Liga arrays de widgets ======
+    //REF:DIAL ====== Liga arrays de widgets ======
     dials[0] = ui->dial_0; dials[1] = ui->dial_1; dials[2] = ui->dial_2; dials[3] = ui->dial_3;
     dials[4] = ui->dial_4; dials[5] = ui->dial_5; dials[6] = ui->dial_6; dials[7] = ui->dial_7;
 
+    //REF:MUTE
     buttons[0] = ui->pushButton_ch01; buttons[1] = ui->pushButton_ch02;
     buttons[2] = ui->pushButton_ch03; buttons[3] = ui->pushButton_ch04;
     buttons[4] = ui->pushButton_ch05; buttons[5] = ui->pushButton_ch06;
     buttons[6] = ui->pushButton_ch07; buttons[7] = ui->pushButton_ch08;
 
+    //REF:TITLE
     titlesArray[0] = ui->bTitleCH01; titlesArray[1] = ui->bTitleCH02;
     titlesArray[2] = ui->bTitleCH03; titlesArray[3] = ui->bTitleCH04;
     titlesArray[4] = ui->bTitleCH05; titlesArray[5] = ui->bTitleCH06;
@@ -101,18 +104,21 @@ MainWindow::MainWindow(QWidget *parent)
     labelsPercentArray[4] = ui->labelPercentCH05; labelsPercentArray[5] = ui->labelPercentCH06;
     labelsPercentArray[6] = ui->labelPercentCH07; labelsPercentArray[7] = ui->labelPercentCH08;
 
-    // Barras de VOLUME (fader em %) -> pbarVol_x
+    //REF:VOLUME Barras de VOLUME (fader em %) -> pbarVol_x
     percBarsArray[0] = ui->pbarVol_0; percBarsArray[1] = ui->pbarVol_1;
     percBarsArray[2] = ui->pbarVol_2; percBarsArray[3] = ui->pbarVol_3;
     percBarsArray[4] = ui->pbarVol_4; percBarsArray[5] = ui->pbarVol_5;
     percBarsArray[6] = ui->pbarVol_6; percBarsArray[7] = ui->pbarVol_7;
 
+    //REF:MAIS
     pbPlus[0] = ui->pbPlus_0; pbPlus[1] = ui->pbPlus_1; pbPlus[2] = ui->pbPlus_2; pbPlus[3] = ui->pbPlus_3;
     pbPlus[4] = ui->pbPlus_4; pbPlus[5] = ui->pbPlus_5; pbPlus[6] = ui->pbPlus_6; pbPlus[7] = ui->pbPlus_7;
 
+    //REF:MENOS
     pbMinus[0] = ui->pbMinus_0; pbMinus[1] = ui->pbMinus_1; pbMinus[2] = ui->pbMinus_2; pbMinus[3] = ui->pbMinus_3;
     pbMinus[4] = ui->pbMinus_4; pbMinus[5] = ui->pbMinus_5; pbMinus[6] = ui->pbMinus_6; pbMinus[7] = ui->pbMinus_7;
 
+    //REF:MENU
     pbTauArray[0] = ui->pb_TAU_0; pbTauArray[1] = ui->pb_TAU_1; pbTauArray[2] = ui->pb_TAU_2;
     pbTauArray[3] = ui->pb_TAU_3; pbTauArray[4] = ui->pb_TAU_4; pbTauArray[5] = ui->pb_TAU_5;
 
@@ -126,10 +132,21 @@ MainWindow::MainWindow(QWidget *parent)
     sceneGroup = new QButtonGroup(this);
     sceneGroup->setExclusive(true);
     for (uint8_t i=0;i<NUMBER_OF_SCENES;i++){
+        pbTauArray[i]->setNormalColor(QColor("#1e1e1e"));
+        //pbTauArray[i]->setHoverColor(QColor("gray"));
+        //pbTauArray[i]->setPressedColor(QColor("gray"));
+        pbTauArray[i]->setTextColor(Qt::white);
+        pbTauArray[i]->setCheckedColor(QColor("#00C853"));
+        pbTauArray[i]->setRadius(4);
+        pbTauArray[i]->setPadding(20);
+        pbTauArray[i]->setCheckable(true);
+
+
         sceneGroup->addButton(pbTauArray[i]);
 
     }
     connect(sceneGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onSceneClicked(QAbstractButton*)));
+
 
     // ----- Liga sinais do dial LR -----
     connect(ui->dial_LR, SIGNAL(valueChanged(int)), this, SLOT(onLRDialValueChanged(int)));
@@ -189,7 +206,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(pbMinus[i], SIGNAL(clicked()), this, SLOT(onMinusClicked()));
     }
 
-    // ====== Config INICIAL dos dials / buffers ======
+    //REF:DIAL ====== Config INICIAL dos dials / buffers ======
     for (int i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         dials[i]->setMinimum(0);
         dials[i]->setMaximum(999);      // 1 volta = 1000 passos
@@ -227,10 +244,11 @@ MainWindow::MainWindow(QWidget *parent)
         dragging[i] = false;
     }
 
+    //REF:OSC
     // ====== Bind UDP e descoberta ======
     QTimer::singleShot(0, this, [this]() {
-        if (!osc->open(12000)) {
-            appendLog("Falha ao abrir UDP local", "red", true, false);
+        if (!osc->open(12000)) { //ATENCAO: ISSO É PORTA LOCAL, DO APP
+            appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
             return;
         }
 
@@ -249,10 +267,11 @@ MainWindow::MainWindow(QWidget *parent)
             osc->subscribeMetersAllChannels();
             osc->subscribeMetersLR();
             osc->syncAll(NUMBER_OF_CHANNELS);   // GET inicial (fader+mute) dos canais
+
         });
     });
 
-    // ===================== TIMER ÚNICO DE UI PARA METERS =====================
+    //REF:METER ===================== TIMER ÚNICO DE UI PARA METERS =====================
     if (!g_uiMeterTimer) {
         g_uiMeterTimer = new QTimer(this);
         g_uiMeterTimer->setInterval(30);
@@ -315,7 +334,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // Meters (/meters/1) -> progressBar_X (NÃO pbarVol_X)
+                //REF:METER Meters (/meters/1) -> progressBar_X (NÃO pbarVol_X)
                 // ==========================================================
                 if (addr == QLatin1String("/meters/1") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -367,7 +386,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // Meters LR (/meters/3) -> progressBar_L / progressBar_R
+                //REF:METER Meters LR (/meters/3) -> progressBar_L / progressBar_R
                 // ==========================================================
                 if (addr == QLatin1String("/meters/3") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -419,7 +438,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                // LR on/off (/lr/mix/on) -> pushButton_LR (ícone + check)
+                //REF:LR LR on/off (/lr/mix/on) -> pushButton_LR (ícone + check)
                 // ==========================================================
                 if (addr == QLatin1String("/lr/mix/on") && !args.isEmpty()) {
                     const int on = args.first().toInt();
@@ -533,11 +552,11 @@ MainWindow::MainWindow(QWidget *parent)
                 }
             });
 
-    // ====== Timer de decay do meter global (se ainda usa essa barra separada) ======
+    // ====== Timer de decay do meter global  ======
     connect(&meterDecayTimer, &QTimer::timeout, this, &MainWindow::updateMeterDecay);
     meterDecayTimer.start(30);
 
-    // ====== Grupo de mute por canal ======
+    //REF:MUTE ====== Grupo de mute por canal ======
     group = new QButtonGroup(this);
     group->setExclusive(false);
 
@@ -610,18 +629,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_LR->setMaximumSize(35,35);
 
 
-    ui->pbarVol_LR->setSegmentCount(24);                // 24 gomos
-    ui->pbarVol_LR->setSegmentSpacing(2);
-    ui->pbarVol_LR->setRadius(6);
-    ui->pbarVol_LR->setPadding(6);
-    ui->pbarVol_LR->setTrackColor(QColor("#1f2124"));   // gomo vazio
-    ui->pbarVol_LR->setFillColor(QColor("#00C853"));    // gomo cheio
-    ui->pbarVol_LR->setBackgroundColor(Qt::transparent); //
-    ui->pbarVol_LR->setTextColor(Qt::white);
-    ui->pbarVol_LR->setTextVisible(false);              // se quiser o número, ligue
-
-
-
     for (uint8_t i = 0; i < NUMBER_OF_CHANNELS; ++i) {
         buttons[i]->setIcon(QIcon(":/icons/resources/unmuted.svg"));
         buttons[i]->setCheckable(true);
@@ -638,6 +645,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Carrega labels persistidas
     loadChannelLabels();
+
 }
 
 // ====== LR: ACUMULADOR (10 voltas = 100%) ======
@@ -842,6 +850,60 @@ void MainWindow::onDialValueChanged(int v)
     // Sempre agenda envio com throttle (~30 Hz), mesmo arrastando
     if (sendTimers[idx]) sendTimers[idx]->start();
 }
+
+void MainWindow::onConnectButton()
+{
+    // 1) Normaliza IP/porta
+    const QString ipText  = ui->lineEditIP->text().trimmed();
+    const int     port    = qMax(1, ui->lineEditPort->text().toInt()); // porta >0
+    const int     oscPort = (port == 0 ? 10024 : port);                // padrão X AIR
+
+    if (ipText.isEmpty()) {
+        appendLog("IP vazio. Informe o endereço do mixer.", "red", true, false);
+        return;
+    }
+
+    // 2) Abre/binda a porta local (do app) — idempotente
+    if (!osc->isOpen()) {
+        if (!osc->open(12000)) { // porta LOCAL do app
+            appendLog("Falha ao abrir UDP local. Não operativo.", "red", true, false);
+            return;
+        }
+    }
+
+    // 3) Define o alvo
+    osc->setTarget(QHostAddress(ipText), oscPort);
+    appendLog("Conexão iniciada pelo usuário", "yellow", false, true);
+    appendLog("Mixer em " + osc->targetAddress().toString().toUtf8()
+                  + " porta " + QByteArray::number(oscPort),
+              "cyan", false, true);
+
+    // 4) Identificação (opcional, só para logar modelo/fw)
+    osc->queryName(); // /xinfo
+
+    // 5) Registro de feedback ("/xremote") com renovação periódica
+    //    (se seu OscClient já se protege de múltiplas chamadas, ótimo;
+    //     senão, pare o anterior antes de iniciar outro)
+    osc->startFeedbackKeepAlive(5000);
+
+    // 6) Assina meters (canais e LR)
+    //    Garanta que estes métodos sejam idempotentes (não duplicar assinaturas).
+    osc->subscribeMetersAllChannels(); // geralmente /meters/1
+    osc->subscribeMetersLR();          // geralmente /meters/3
+
+    // 7) GET inicial dos canais (fader+mute)
+    osc->syncAll(NUMBER_OF_CHANNELS);
+
+    // 8) ***FALTAVA***: GET inicial do LR (fader e mute)
+    //    Use helpers se existirem; caso contrário mande GET “cru”.
+    //    Ex.: osc->getMainLRFader(); osc->getMainLRMute();
+    //osc->sendGet(QStringLiteral("/lr/mix/fader"));
+    //osc->sendGet(QStringLiteral("/lr/mix/on"));
+
+    // 9) (Opcional) Dump total para “forçar” estado completo
+    // osc->requestStatDump(); // se implementado (ex. "/-stat/dump")
+}
+
 
 void MainWindow::onDialPressed()
 {

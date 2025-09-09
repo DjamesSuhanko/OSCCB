@@ -20,6 +20,7 @@
 #include <modernbutton.h>
 #include <modernprogressbar.h>
 
+
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
 #define PROFILE_INI "profiles.ini"
@@ -78,6 +79,7 @@ private slots:
     void onLRDialPressed();
     void onLRDialReleased();
     void flushLRFaderSend();
+    void onConnectButton();
 
 private:
     Ui::MainWindow *ui;
@@ -110,7 +112,7 @@ private:
     // QButtonGroup *labelChanGroup = nullptr;
 
     QPushButton *titlesArray[NUMBER_OF_CHANNELS]{};
-    QPushButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)
+    ModernButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)
 
     ModernButton *pbPlus[NUMBER_OF_CHANNELS]{};
     ModernButton *pbMinus[NUMBER_OF_CHANNELS]{};

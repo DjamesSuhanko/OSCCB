@@ -29,7 +29,7 @@ private:
     int    m_radius   = 6;                  // cantos arredondados dos gomos
     int    m_padding  = 6;                  // padding interno da barra
 
-    QColor m_track = QColor("#2b2d31");     // cor do gomo vazio
+    QColor m_track = QColor("#1e1e1e");     // cor do gomo vazio
     QColor m_fill  = QColor("#00C853");     // cor do gomo preenchido
     QColor m_bg    = Qt::transparent;       // fundo atrás da barra
     QColor m_text  = Qt::white;             // texto central (se textVisible=true)

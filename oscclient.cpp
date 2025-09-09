@@ -105,7 +105,11 @@ void OscClient::setMainLRFader(float v01) {
 void OscClient::setMainLRMute(bool on) {
     send(QStringLiteral("/lr/mix/on"), "i", { packInt32(on ? 1 : 0) });
 }
-void OscClient::getMainLRFader() { send(QStringLiteral("/lr/mix/fader"), "s", { packString("?") }); }
+void OscClient::getMainLRFader() {
+    const QString path = QStringLiteral("/lr/mix/fader");
+    send(path, "s", { packString("?") });
+    //send(QStringLiteral(""), "s", { packString("?") });
+}
 void OscClient::getMainLRMute()  { send(QStringLiteral("/lr/mix/on"),    "s", { packString("?") }); }
 
 // --------- RX helpers ----------
