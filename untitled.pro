@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     modernbutton.cpp \
+    moderncombobox.cpp \
     moderndial.cpp \
     modernprogressbar.cpp \
     oscclient.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     modernbutton.h \
+    moderncombobox.h \
     moderndial.h \
     modernprogressbar.h \
     oscclient.h \

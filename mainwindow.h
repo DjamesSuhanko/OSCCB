@@ -23,6 +23,7 @@
 
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
+#define NUMBER_OF_HELPS    9 //botões de help na aba menu
 #define PROFILE_INI "profiles.ini"
 #define LOCAL_PORT_BIND 12000
 
@@ -82,6 +83,8 @@ private slots:
     void flushLRFaderSend();
     void onConnectButton();
 
+    void onHelpButtonsClicked(QAbstractButton* b);
+
 private:
     Ui::MainWindow *ui;
 
@@ -111,6 +114,9 @@ private:
     QButtonGroup *group = nullptr;
     QButtonGroup *sceneGroup = nullptr;
     // QButtonGroup *labelChanGroup = nullptr;
+
+    QButtonGroup *helpGroup = nullptr;
+    QPushButton *helpButtons[NUMBER_OF_HELPS];
 
     QPushButton *titlesArray[NUMBER_OF_CHANNELS]{};
     ModernButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)

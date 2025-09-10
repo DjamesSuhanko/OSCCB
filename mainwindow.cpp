@@ -49,6 +49,32 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // //REF:COMBOBOX
+    // QStringList comboItens = {"Inicio","Canais","Meter de Sinais","Meter de Volume","Volume Rotativo","Volume Incremental","Botão de Mute","Criar e Modificar Perfil","Rótulos de canais"};
+    // ui->comboBox->addItems(comboItens);
+    // ui->comboBoxHelp->addItems(comboItens);
+    // ui->comboBoxHelp->setCornerRadius(12);
+    // ui->comboBoxHelp->setBorderWidth(1);
+    // ui->comboBoxHelp->setPadding(12);
+    // //ui->comboBoxHelp->setLeadingIcon(QIcon(":/icons/resources/list.svg")); // opcional
+
+    // ui->comboBoxHelp->setPaletteColors({
+    //     QColor("#202124"), // bg caixa
+    //     QColor("#3c4043"), // borda
+    //     QColor("#e8eaed"), // texto
+    //     QColor("#e8eaed"), // seta
+    //     // itens:
+    //     QColor("#202124"), // item bg normal
+    //     QColor("#2b2c2f"), // item bg hover
+    //     QColor("#00C853"), // item bg selected
+    //     QColor("#e8eaed")  // item texto
+    // });
+    // ui->comboBoxHelp->setItemRadius(8);
+    // ui->comboBoxHelp->setItemMinHeight(30);
+    // ui->comboBoxHelp->setItemHPad(12);
+    // ui->comboBoxHelp->setItemVPad(6);
+
+    // ui->comboBoxHelp->setPopupMaxHeight(280);
 
     // inicializa cache de mute enviado
     if (!s_lastMuteInit) {
@@ -123,12 +149,26 @@ MainWindow::MainWindow(QWidget *parent)
     pbTauArray[0] = ui->pb_TAU_0; pbTauArray[1] = ui->pb_TAU_1; pbTauArray[2] = ui->pb_TAU_2;
     pbTauArray[3] = ui->pb_TAU_3; pbTauArray[4] = ui->pb_TAU_4; pbTauArray[5] = ui->pb_TAU_5;
 
+    //REF:HELP
+    helpButtons[0] = ui->pbHelp_01; helpButtons[1] = ui->pbHelp_02; helpButtons[2] = ui->pbHelp_03; helpButtons[3] = ui->pbHelp_04;
+    helpButtons[4] = ui->pbHelp_05; helpButtons[5] = ui->pbHelp_06; helpButtons[6] = ui->pbHelp_07; helpButtons[7] = ui->pbHelp_08;
+    helpButtons[8] = ui->pbHelp_09;
+
     ui->pb_TAU_0->setProperty("sceneKey", "INICIO");
     ui->pb_TAU_1->setProperty("sceneKey", "ORACAO");
     ui->pb_TAU_2->setProperty("sceneKey", "RECITATIVO");
     ui->pb_TAU_3->setProperty("sceneKey", "TESTEMUNHO");
     ui->pb_TAU_4->setProperty("sceneKey", "PALAVRA");
     ui->pb_TAU_5->setProperty("sceneKey", "ENCERRAMENTO");
+
+    this->helpGroup = new QButtonGroup(this);
+    this->helpGroup->setExclusive(true);
+
+    for (uint8_t i=0; i< NUMBER_OF_HELPS;i++){
+        this->helpGroup->addButton(this->helpButtons[i]);
+    }
+    connect(helpGroup,SIGNAL(buttonClicked(QAbstractButton*)),this,SLOT(onHelpButtonsClicked(QAbstractButton* b)));
+
 
     sceneGroup = new QButtonGroup(this);
     sceneGroup->setExclusive(true);
@@ -1106,6 +1146,25 @@ void MainWindow::onSceneClicked(QAbstractButton* b)
     }
     s.endGroup();
 }
+
+void MainWindow::onHelpButtonsClicked(QAbstractButton* b)
+{
+    const QString key = b->property("sceneKey").toString();
+    QSettings s(profilesIniPath(), QSettings::IniFormat);
+    s.setFallbacksEnabled(false);
+
+    if (!s.childGroups().contains(key))
+        return;
+
+    s.beginGroup(key);
+    for (int ch = 0; ch < NUMBER_OF_HELPS; ++ch) {
+        const bool item = s.value(QString("m%1").arg(ch), false).toBool();
+        buttons[ch]->setChecked(item);
+        // TODO: MUDA A ABA DO STACK AQUI
+    }
+    s.endGroup();
+}
+
 
 // ============ Meter decay ============
 void MainWindow::updateMeterDecay()

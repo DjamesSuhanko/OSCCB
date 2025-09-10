@@ -99,7 +99,7 @@ border: 0px;</string>
                    <string notr="true">background-color: #3E2723;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>3</number>
                   </property>
                   <widget class="QWidget" name="tabFaders">
                    <attribute name="title">
@@ -4287,6 +4287,773 @@ border: 1px solid rgb(80, 80, 80);  ;</string>
                    <attribute name="title">
                     <string>Ajuda</string>
                    </attribute>
+                   <layout class="QGridLayout" name="gridLayout_71">
+                    <item row="0" column="0">
+                     <layout class="QHBoxLayout" name="horizontalLayout_17">
+                      <item>
+                       <widget class="QFrame" name="frame">
+                        <property name="styleSheet">
+                         <string notr="true">    QFrame {
+        background-color: #281917;   /* cor de fundo */
+        border: 1px solid #00C853;   /* cor e espessura da borda */
+        border-radius: 12px;         /* raio dos cantos */
+    }</string>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::Shape::NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Shadow::Raised</enum>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_70">
+                         <item row="0" column="0">
+                          <layout class="QVBoxLayout" name="verticalLayout_3">
+                           <property name="spacing">
+                            <number>10</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>10</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>10</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>10</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>10</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_01">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>AO ABRIR O OSCCB</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_02">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>CANAIS</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_03">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>MEDIDOR DE SINAL</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_04">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>MEDIDOR DE VOLUME</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_05">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>VOLUME ROTATIVO</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_06">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>VOLUME INCREMENTAL</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_07">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>MUDO</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_08">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>CRIAR E MODIFICAR PERFIL</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pbHelp_09">
+                             <property name="styleSheet">
+                              <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+   padding: 10px 20px;
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+                             </property>
+                             <property name="text">
+                              <string>RÓTULOS</string>
+                             </property>
+                             <property name="checkable">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_2">
+                             <property name="orientation">
+                              <enum>Qt::Orientation::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QStackedWidget" name="stackedWidget">
+                        <property name="styleSheet">
+                         <string notr="true">        background-color: #281917;   /* cor de fundo */
+        border: 1px solid #00C853;   /* cor e espessura da borda */
+        border-radius: 12px;         /* raio dos cantos */</string>
+                        </property>
+                        <property name="currentIndex">
+                         <number>1</number>
+                        </property>
+                        <widget class="QWidget" name="page_01"/>
+                        <widget class="QWidget" name="page_02">
+                         <widget class="QGroupBox" name="groupBox_9">
+                          <property name="geometry">
+                           <rect>
+                            <x>740</x>
+                            <y>150</y>
+                            <width>168</width>
+                            <height>321</height>
+                           </rect>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>180</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">background-color: #3E2723;
+border: 1px solid black;      /* opcional: força borda */
+border-radius: 6px;   /* quanto maior o número, mais arredondado */
+</string>
+                          </property>
+                          <property name="title">
+                           <string/>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_60">
+                           <item row="2" column="0">
+                            <layout class="QHBoxLayout" name="horizontalLayout_16">
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_11">
+                               <item>
+                                <layout class="QGridLayout" name="gridLayout_62">
+                                 <item row="0" column="0">
+                                  <spacer name="horizontalSpacer_105">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item row="0" column="1">
+                                  <widget class="QLabel" name="labelPercentCH07_2">
+                                   <property name="font">
+                                    <font>
+                                     <family>Inter</family>
+                                     <strikeout>false</strikeout>
+                                     <fontweight>ExtraBold</fontweight>
+                                    </font>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true">color: #ffffaa;
+ border: 0px solid black;      /* opcional: força borda */
+</string>
+                                   </property>
+                                   <property name="text">
+                                    <string>0.0000</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="2">
+                                  <spacer name="horizontalSpacer_106">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_28">
+                                 <item>
+                                  <widget class="ModernButton" name="pbMinus_8">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>40</width>
+                                     <height>40</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>40</width>
+                                     <height>40</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>20</pointsize>
+                                     <fontweight>Black</fontweight>
+                                    </font>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true"/>
+                                   </property>
+                                   <property name="text">
+                                    <string>-</string>
+                                   </property>
+                                   <property name="flat">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_107">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="ModernButton" name="pbPlus_8">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>40</width>
+                                     <height>40</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>40</width>
+                                     <height>40</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>20</pointsize>
+                                     <fontweight>Black</fontweight>
+                                    </font>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true"/>
+                                   </property>
+                                   <property name="text">
+                                    <string>+</string>
+                                   </property>
+                                   <property name="flat">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_29">
+                                 <item>
+                                  <spacer name="horizontalSpacer_108">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="ModernDial" name="dial_8">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>80</width>
+                                     <height>80</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>80</width>
+                                     <height>80</height>
+                                    </size>
+                                   </property>
+                                   <property name="wrapping">
+                                    <bool>true</bool>
+                                   </property>
+                                   <property name="notchTarget">
+                                    <double>100.000000000000000</double>
+                                   </property>
+                                   <property name="notchesVisible">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_109">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                                 <item>
+                                  <spacer name="horizontalSpacer_110">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_ch07_2">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true">* { font-family: &quot;Inter&quot;, &quot;Roboto&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 16px; }
+QPushButton {
+color: cyan;
+ border-radius: 21px;
+  
+background-color: #00d619;
+  border: 2px solid #00ff1e;
+
+}
+
+QPushButton:checked {
+	background-color: #d90000;
+    color: white;
+    border: 1px solid #ff6a00;
+
+}
+</string>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="checkable">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_111">
+                                   <property name="orientation">
+                                    <enum>Qt::Orientation::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>40</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QProgressBar" name="progressBar_8">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>20</width>
+                                 <height>1000</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QProgressBar {
+  border: 1px solid #3a3f47;
+  border-radius: 4px;
+  background: #1f2125;
+}</string>
+                               </property>
+                               <property name="value">
+                                <number>0</number>
+                               </property>
+                               <property name="textVisible">
+                                <bool>false</bool>
+                               </property>
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Vertical</enum>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item row="0" column="0">
+                            <layout class="QGridLayout" name="gridLayout_66">
+                             <item row="2" column="0">
+                              <widget class="ModernProgressBar" name="pbarVol_8">
+                               <property name="styleSheet">
+                                <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                               </property>
+                               <property name="value">
+                                <number>0</number>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignmentFlag::AlignCenter</set>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="0">
+                              <layout class="QGridLayout" name="gridLayout_69">
+                               <item row="0" column="2">
+                                <spacer name="horizontalSpacer_112">
+                                 <property name="orientation">
+                                  <enum>Qt::Orientation::Horizontal</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>40</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item row="0" column="1">
+                                <widget class="QPushButton" name="bTitleCH07_2">
+                                 <property name="font">
+                                  <font>
+                                   <fontweight>Black</fontweight>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>ORGÃO</string>
+                                 </property>
+                                 <property name="flat">
+                                  <bool>true</bool>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="0" column="0">
+                                <spacer name="horizontalSpacer_113">
+                                 <property name="orientation">
+                                  <enum>Qt::Orientation::Horizontal</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>40</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_13">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">color: white;
+border: 0px;
+</string>
+                               </property>
+                               <property name="text">
+                                <string>CANAL 7</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignmentFlag::AlignCenter</set>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                        <widget class="QWidget" name="page_03"/>
+                        <widget class="QWidget" name="page_04"/>
+                        <widget class="QWidget" name="page_05"/>
+                        <widget class="QWidget" name="page_06"/>
+                        <widget class="QWidget" name="page_07"/>
+                        <widget class="QWidget" name="page_08"/>
+                        <widget class="QWidget" name="page_09"/>
+                        <widget class="QWidget" name="page_10"/>
+                        <widget class="QWidget" name="page_11"/>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
                   </widget>
                  </widget>
                 </item>
@@ -4316,96 +5083,6 @@ color: white;
            </property>
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_33">
-             <item row="0" column="5">
-              <widget class="ModernButton" name="pb_TAU_5">
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    background-color: black;
-    color: gray;
-    border: 1px solid #00C853;      /* opcional: força borda */
-   border-radius: 6px;   /* quanto maior o número, mais arredondado */
-
-}
-
-QPushButton:pressed {
-    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
-}
-
-QPushButton:checked {
-background-color: #00C853;
-  border: 2px solid #00ff1e;
-color: white;
-}
-</string>
-               </property>
-               <property name="text">
-                <string>ENCERRAMENTO</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="ModernButton" name="pb_TAU_1">
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    background-color: black;
-    color: gray;
-    border: 1px solid black;      /* opcional: força borda */
-   border-radius: 6px;   /* quanto maior o número, mais arredondado */
-
-}
-
-QPushButton:pressed {
-    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
-}
-
-QPushButton:checked {
-background-color: #00C853;
-  border: 2px solid #00ff1e;
-color: white;
-}
-</string>
-               </property>
-               <property name="text">
-                <string>ORAÇÃO</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="ModernButton" name="pb_TAU_0">
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    background-color: black;
-    color: gray;
-    border: 1px solid black;      /* opcional: força borda */
-   border-radius: 6px;   /* quanto maior o número, mais arredondado */
-
-}
-
-QPushButton:pressed {
-    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
-}
-
-QPushButton:checked {
-background-color: #00C853;
-  border: 2px solid #00ff1e;
-color: white;
-}
-</string>
-               </property>
-               <property name="text">
-                <string>INICIO</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="3">
               <widget class="ModernButton" name="pb_TAU_3">
                <property name="styleSheet">
@@ -4466,6 +5143,66 @@ color: white;
                </property>
               </widget>
              </item>
+             <item row="0" column="0">
+              <widget class="ModernButton" name="pb_TAU_0">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid black;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+               </property>
+               <property name="text">
+                <string>INICIO</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="ModernButton" name="pb_TAU_1">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid black;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+               </property>
+               <property name="text">
+                <string>ORAÇÃO</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="2">
               <widget class="ModernButton" name="pb_TAU_2">
                <property name="styleSheet">
@@ -4490,6 +5227,36 @@ color: white;
                </property>
                <property name="text">
                 <string>RECITATIVO</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="ModernButton" name="pb_TAU_5">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    background-color: black;
+    color: gray;
+    border: 1px solid #00C853;      /* opcional: força borda */
+   border-radius: 6px;   /* quanto maior o número, mais arredondado */
+
+}
+
+QPushButton:pressed {
+    background-color: #cccccc;    /* verde escuro ao pressionar (opcional) */
+}
+
+QPushButton:checked {
+background-color: #00C853;
+  border: 2px solid #00ff1e;
+color: white;
+}
+</string>
+               </property>
+               <property name="text">
+                <string>ENCERRAMENTO</string>
                </property>
                <property name="checkable">
                 <bool>true</bool>
