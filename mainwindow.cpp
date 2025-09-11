@@ -167,8 +167,91 @@ MainWindow::MainWindow(QWidget *parent)
     for (uint8_t i=0; i< NUMBER_OF_HELPS;i++){
         this->helpGroup->addButton(this->helpButtons[i]);
     }
-    connect(helpGroup,SIGNAL(buttonClicked(QAbstractButton*)),this,SLOT(onHelpButtonsClicked(QAbstractButton* b)));
 
+    //VAZIO NA ENTRADA helpTexts[0]
+    QString textos;
+    textos = " ";
+    helpTexts.append(textos);
+
+    //AO ABRIR O OSCCB helpTexts[1]
+    textos = "<h1>Ao abrir o programa OSCCB</h1>";
+    textos = textos + "<p>Ao abrir o programa, será feita uma tentativa automática de comunicação com o mixer na rede.";
+    textos = textos + " Se a comunicação falhar, será feita uma tentativa de conexão automática utilizando o endereço e porta que aparecem em <b>logs</b>.";
+    textos = textos + " Se ainda assim falhar, você tem a opção de:";
+    textos = textos + "<p>1. Tentar a conexão apertando o botão <b>Conectar</b>.";
+    textos = textos + "<p>2. Trocar endereço e/ou porta antes de tentar conectar (necessário conhecimento da infraestrutura).";
+    textos = textos + "<p><p><H3>Operação do Som</h3>";
+    textos = textos + "<p>Em operação normal, tudo que será necessário fazer é <b>controlar os níveis de volume</b> e os <b>mutes</b> dos canais, na aba <b>Faders</b>.";
+    textos = textos + "<p><p><h3>Logs</h3>";
+    textos = textos + "<p>A aba logs <b>somente será usada em caso de anomalias. Ela contém informação sistemica do aplicativo e pode indicar a razão de uma eventual falha.";
+    textos = textos + " Caso algo ocorra, uma foto dessa tela pode ser enviada ao suporte de som para análise.";
+    textos = textos + "<p><p><h3>Config</h3>";
+    textos = textos + "<p>Reservado à engenharia";
+    textos = textos + "<p><p><h3>Ajuda</h3>";
+    textos = textos + "<p>No menu de ajuda os Operadores de Som encontrarão todas as informações necessárias de operação.";
+    helpTexts.append(textos);
+
+    //CANAIS helpTexts[2]
+    textos = "<h1>Controlador de Canais</h1><p>Cada canal tem um conjunto de componentes, como abaixo. Repare que cada canal é composto por um <b>rótulo</b>, o <b>nome do canal</b>, ";
+    textos =  textos + "um <b>medidor de volume</b> (percentual, de 0% até 100%), um <b>valor fracionado</b> que vai de 0.000 até 1.000 (sendo esse um valor de comunicação com o mixer), ";
+    textos = textos + "dois <b>botões (- e +)</b> para volume de 1% em 1% para mais ou para menos, um <b>volume rotativo</b> para ajustes precisos e um botão de mudo.";
+    helpTexts.append(textos);
+
+    //MEDIDOR DE SINAL helpTexts[3]
+    textos = "<h1>Medidor de Sinal dos microfones</h1>";
+    textos = textos + "<p>A barra vertical mostra a entrada de sinal, que varia conforme o volume. Mas não é importante para o operador";
+    textos = textos + " saber o valor que representa. O importante é notar se há sinal, indicando que o microfone está funcionando.";
+    textos = textos + "<p>Abaixo está a barra de sinal em destaque, <b>do lado direito do controlador de canal</b>. O medidor de sinal é a <b>barra vertical do lado direito</b>";
+    helpTexts.append(textos);
+
+    //MEDIDOR DE VOLUME helpText[4]
+    textos = "<h1>Medidor de Volume configurado</h1>";
+    textos = textos + "<p>A barra horizontal abaixo do texto do canal representa o percentual de volume ajustado através do volume rotativo, ";
+    textos = textos + "do botão de volume ou advindo do mixer. O <b>valor percentual real</b> está dentro do <b>disco de volume rotativo</b>.";
+    helpTexts.append(textos);
+
+    //VOLUME ROTATIVO
+    textos = "<h1>Volume Rotativo</h1>";
+    textos = textos + "<p>Nos programas tradicionais, o ajuste de volume é feito através dos faders lineares. O problema com esse tipo de ajuste em";
+    textos = textos + " tablets é a imprecisão no ajuste, gerando saltos significativos de volume. Com o disco de volume rotativo a precisão é muito maior.";
+    textos = textos + "No disco de volume você pode notar um pequeno circulo. Ele é indicador de posição. Para ajustar o volume, <b>toque no disco, não no circulo</b>.";
+    textos = textos + "<p>Você deve tocar no disco do lado oposto do circulo para ajuste sem salto.";
+    textos = textos + "<p>Toque no volume rotativo abaixo (lado direito) E gire o volume 1 volta completa. Cada volta representa 10% do volume máximo.";
+    textos = textos + " Para experimentar maior precisão, toque no disco de volume e arraste o dedo para longe. Quanto mais longe do disco de volume, ";
+    textos = textos + " maior será a precisão ao efetuar o ajuste.";
+    helpTexts.append(textos);
+
+    //VOLUME INCREMENTAL
+    textos = "<h1>Volume por incremento/decremento</h1>";
+    textos = textos + "<p>Os botões <b>+</b> e <b>-</b> fazem o ajuste de volume incrementando ou decrementando em 1% a cada toque. Em muitos casos ";
+    textos = textos + "pode ser mais adequado (e mais rápido) ajustar o volume através desse botões. Sinta-se à vontade para usar seu modo preferido!";
+    helpTexts.append(textos);
+
+    //MUDO
+    textos = "<h1>Botões de mute/unmute</h1>";
+    textos = textos + "<p>Quando os microfones estão abertos, o botão de mute fica verde, com o desenho de um microfone. Quando algum microfone é ";
+    textos = textos + " colocado em <b>mudo</b>, o botão fica vermelho, com um desenho de microfone cortado.";
+    textos = textos + "<p>Dependendo do momento, determinados microfones precisam estar fechados. Para reduzir esse trabalho, veja o menu de ajuda <b>CRIAR E MODIFICAR PERFIL</b>.";
+    textos = textos + "Abaixo, é possível testar o botão para observar sua mudança (no controlador à direita).";
+
+    for (int i = 0; i < NUMBER_OF_HELPS; ++i) {
+        helpButtons[i]->setProperty("pageIndex", i);
+        connect(helpButtons[i], &QPushButton::clicked,this, &MainWindow::onHelpButtonsClicked);
+    }
+
+    //REF:HELP:HIDE REF:HIDES
+    //ui->frame_CH->hide();
+    ui->tabWidget->setCurrentIndex(0);
+
+
+    //MUTE DO EXEMPLO DO HELP
+    ui->pbMuteHELP->setCheckedColor("#00C853");
+    ui->pbMuteHELP->setNormalColor("red");
+    ui->pbMuteHELP->setHoverColor("red");
+    ui->pbMuteHELP->setPressedColor("red");
+    ui->pbMuteHELP->setIcon(QIcon(":/icons/resources/muted.svg"));
+    connect(ui->pbMuteHELP,SIGNAL(clicked(bool)),this,SLOT(pbMuteHelpSlot()));
+    //connect(helpButtons[0],SIGNAL(clicked(bool)),this,SLOT(onHelpButtonsClicked()));
 
     sceneGroup = new QButtonGroup(this);
     sceneGroup->setExclusive(true);
@@ -193,6 +276,25 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dial_LR, SIGNAL(valueChanged(int)), this, SLOT(onLRDialValueChanged(int)));
     connect(ui->dial_LR, &QDial::sliderPressed,  this, &MainWindow::onLRDialPressed);
     connect(ui->dial_LR, &QDial::sliderReleased, this, &MainWindow::onLRDialReleased);
+
+    //DIAL HELP
+    ui->dial_HELP->setWrapping(true);
+    ui->dial_HELP->setNotchesVisible(false);
+    ui->dial_HELP->setRange(0, 999);       // 1 volta = 1000 passos
+    ui->dial_HELP->setSingleStep(1);
+    ui->dial_HELP->setPageStep(10);
+
+    ui->dial_HELP->setProperty("turns", 10);            // visual: 10 voltas
+    ui->dial_HELP->setProperty("fullCircle", true);
+    ui->dial_HELP->setProperty("displayTurnPercent", false); // texto = % total
+    ui->dial_HELP->setProperty("showValue", true);
+
+    // Aparência
+    ui->dial_HELP->setProperty("trackColor",    QColor("#e6e6e6"));
+    ui->dial_HELP->setProperty("progressColor", QColor("#00C853"));
+    ui->dial_HELP->setProperty("handleColor",   QColor("#ffffff"));
+    ui->dial_HELP->setProperty("textColor",     QColor("white"));
+    ui->dial_HELP->setProperty("thickness",     6);
 
     // ----- Setup inicial do dial LR (ACUMULADOR: 10 voltas obrigatórias) -----
     ui->dial_LR->setWrapping(true);
@@ -1147,23 +1249,20 @@ void MainWindow::onSceneClicked(QAbstractButton* b)
     s.endGroup();
 }
 
-void MainWindow::onHelpButtonsClicked(QAbstractButton* b)
+void MainWindow::onHelpButtonsClicked()
 {
-    const QString key = b->property("sceneKey").toString();
-    QSettings s(profilesIniPath(), QSettings::IniFormat);
-    s.setFallbacksEnabled(false);
+    auto b = qobject_cast<QAbstractButton*>(sender());
+    if (!b) return;
 
-    if (!s.childGroups().contains(key))
-        return;
+    const int idx = b->property("pageIndex").toInt();
 
-    s.beginGroup(key);
-    for (int ch = 0; ch < NUMBER_OF_HELPS; ++ch) {
-        const bool item = s.value(QString("m%1").arg(ch), false).toBool();
-        buttons[ch]->setChecked(item);
-        // TODO: MUDA A ABA DO STACK AQUI
-    }
-    s.endGroup();
+    ui->textBrowser->clear();
+    ui->textBrowser->setText(helpTexts.length()-1 > idx ? html_start + helpTexts.at(idx+1) + html_end : html_start + "<h3>A Ajuda para esse item não foi implementada nessa versão</h3>" + html_end);
+
+    ui->stackedWidget->setCurrentIndex(idx > ui->stackedWidget->count() ? 0 : idx);
+
 }
+
 
 
 // ============ Meter decay ============
@@ -1210,6 +1309,19 @@ void MainWindow::onPlusLRClicked()
     // throttle de envio
     if (sendTimerLR){
         sendTimerLR->start();
+    }
+}
+
+void MainWindow::pbMuteHelpSlot()
+{
+    auto b = qobject_cast<QAbstractButton*>(sender());
+    if (!b) { return;}
+
+    const bool checkedHELP = b->isChecked();
+    //LOGICA PARA BOTAO DO MUTE NO HELP
+    if (ui->pbMuteHELP) {
+        ui->pbMuteHELP->setIcon(QIcon(checkedHELP ? QStringLiteral(":/icons/resources/unmuted.svg") : QStringLiteral(":/icons/resources/muted.svg")));
+
     }
 }
 
