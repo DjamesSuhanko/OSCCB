@@ -99,7 +99,7 @@ border: 0px;</string>
                    <string notr="true">background-color: #3E2723;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="tabFaders">
                    <attribute name="title">
@@ -4656,6 +4656,26 @@ color: white;
                               </size>
                              </property>
                             </spacer>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="label_39">
+                             <property name="font">
+                              <font>
+                               <pointsize>11</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">border: 0px solid black;
+color: gray;</string>
+                             </property>
+                             <property name="text">
+                              <string>OSCCB v1.0 Beta</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
                            </item>
                           </layout>
                          </item>
@@ -9600,89 +9620,884 @@ border: 0px;</string>
                              </item>
                             </layout>
                            </widget>
-                           <widget class="QWidget" name="page_6">
-                            <widget class="QLabel" name="label_20">
-                             <property name="geometry">
-                              <rect>
-                               <x>1060</x>
-                               <y>150</y>
-                               <width>51</width>
-                               <height>111</height>
-                              </rect>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>48</pointsize>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>7</string>
-                             </property>
-                            </widget>
-                           </widget>
+                           <widget class="QWidget" name="page_6"/>
                            <widget class="QWidget" name="page_7">
-                            <widget class="QLabel" name="label_21">
-                             <property name="geometry">
-                              <rect>
-                               <x>740</x>
-                               <y>250</y>
-                               <width>51</width>
-                               <height>111</height>
-                              </rect>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>48</pointsize>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>8</string>
-                             </property>
-                            </widget>
-                           </widget>
-                           <widget class="QWidget" name="page_8">
-                            <widget class="QLabel" name="label_22">
-                             <property name="geometry">
-                              <rect>
-                               <x>1040</x>
-                               <y>140</y>
-                               <width>51</width>
-                               <height>111</height>
-                              </rect>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>48</pointsize>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>9</string>
-                             </property>
-                            </widget>
-                           </widget>
-                           <widget class="QWidget" name="page_9">
-                            <widget class="QLabel" name="label_23">
-                             <property name="geometry">
-                              <rect>
-                               <x>720</x>
-                               <y>180</y>
-                               <width>81</width>
-                               <height>111</height>
-                              </rect>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>48</pointsize>
-                               <bold>true</bold>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>10</string>
-                             </property>
-                            </widget>
+                            <layout class="QGridLayout" name="gridLayout_179">
+                             <item row="0" column="0">
+                              <layout class="QHBoxLayout" name="horizontalLayout_54">
+                               <item>
+                                <spacer name="horizontalSpacer_216">
+                                 <property name="orientation">
+                                  <enum>Qt::Orientation::Horizontal</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>40</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_21">
+                                 <item>
+                                  <widget class="QFrame" name="frame_CH_12">
+                                   <property name="frameShape">
+                                    <enum>QFrame::Shape::StyledPanel</enum>
+                                   </property>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Shadow::Raised</enum>
+                                   </property>
+                                   <layout class="QGridLayout" name="gridLayout_163">
+                                    <item row="0" column="1">
+                                     <widget class="QGroupBox" name="groupBox_23">
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>180</width>
+                                        <height>16777215</height>
+                                       </size>
+                                      </property>
+                                      <property name="styleSheet">
+                                       <string notr="true">background-color: #3E2723;
+border: 1px solid black;      /* opcional: força borda */
+border-radius: 6px;   /* quanto maior o número, mais arredondado */
+
+</string>
+                                      </property>
+                                      <property name="title">
+                                       <string/>
+                                      </property>
+                                      <layout class="QGridLayout" name="gridLayout_164">
+                                       <item row="1" column="0">
+                                        <layout class="QHBoxLayout" name="horizontalLayout_55">
+                                         <item>
+                                          <layout class="QGridLayout" name="gridLayout_165">
+                                           <item row="2" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_166">
+                                             <item row="0" column="2">
+                                              <widget class="ModernDial" name="dial_18">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>80</width>
+                                                 <height>80</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>80</width>
+                                                 <height>80</height>
+                                                </size>
+                                               </property>
+                                               <property name="wrapping">
+                                                <bool>true</bool>
+                                               </property>
+                                               <property name="notchTarget">
+                                                <double>100.000000000000000</double>
+                                               </property>
+                                               <property name="notchesVisible">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="3">
+                                              <spacer name="horizontalSpacer_217">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="1">
+                                              <spacer name="horizontalSpacer_218">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="4" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_167">
+                                             <item row="0" column="3">
+                                              <spacer name="horizontalSpacer_219">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="2">
+                                              <widget class="ModernButton" name="pushButton_ch02_12">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>42</width>
+                                                 <height>42</height>
+                                                </size>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">* { font-family: &quot;Inter&quot;, &quot;Roboto&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 16px; }
+QPushButton {
+color: cyan;
+ border-radius: 21px;
+  
+background-color: #00d619;
+  border: 2px solid #00ff1e;
+
+}
+
+QPushButton:checked {
+	background-color: #d90000;
+    color: white;
+    border: 1px solid #ff6a00;
+
+}
+</string>
+                                               </property>
+                                               <property name="text">
+                                                <string/>
+                                               </property>
+                                               <property name="checkable">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="1">
+                                              <spacer name="horizontalSpacer_220">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="1" column="0">
+                                            <layout class="QHBoxLayout" name="horizontalLayout_56">
+                                             <item>
+                                              <widget class="ModernButton" name="pbMinus_19">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="font">
+                                                <font>
+                                                 <pointsize>20</pointsize>
+                                                 <fontweight>Black</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true"/>
+                                               </property>
+                                               <property name="text">
+                                                <string>-</string>
+                                               </property>
+                                               <property name="flat">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <spacer name="horizontalSpacer_221">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item>
+                                              <widget class="ModernButton" name="pbPlus_19">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="font">
+                                                <font>
+                                                 <pointsize>20</pointsize>
+                                                 <fontweight>Black</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true"/>
+                                               </property>
+                                               <property name="text">
+                                                <string>+</string>
+                                               </property>
+                                               <property name="flat">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="0" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_168">
+                                             <item row="0" column="0">
+                                              <spacer name="horizontalSpacer_222">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="1">
+                                              <widget class="QLabel" name="labelPercentCH02_13">
+                                               <property name="font">
+                                                <font>
+                                                 <family>Inter</family>
+                                                 <strikeout>false</strikeout>
+                                                 <fontweight>ExtraBold</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">color: #ffffaa;
+ border: 0px solid black;      /* opcional: força borda */
+</string>
+                                               </property>
+                                               <property name="text">
+                                                <string>0.0000</string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="2">
+                                              <spacer name="horizontalSpacer_223">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                          </layout>
+                                         </item>
+                                         <item>
+                                          <widget class="QProgressBar" name="progressBar_19">
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>20</width>
+                                             <height>1000</height>
+                                            </size>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">QProgressBar {
+  border: 1px solid #3a3f47;
+  border-radius: 4px;
+  background: #1f2125;
+}</string>
+                                           </property>
+                                           <property name="value">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="textVisible">
+                                            <bool>false</bool>
+                                           </property>
+                                           <property name="orientation">
+                                            <enum>Qt::Orientation::Vertical</enum>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <layout class="QGridLayout" name="gridLayout_169">
+                                         <item row="0" column="0">
+                                          <layout class="QGridLayout" name="gridLayout_170">
+                                           <item row="0" column="1">
+                                            <widget class="QPushButton" name="bTitleCH02_13">
+                                             <property name="font">
+                                              <font>
+                                               <fontweight>Black</fontweight>
+                                              </font>
+                                             </property>
+                                             <property name="styleSheet">
+                                              <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                                             </property>
+                                             <property name="text">
+                                              <string>PULPITO</string>
+                                             </property>
+                                             <property name="flat">
+                                              <bool>true</bool>
+                                             </property>
+                                            </widget>
+                                           </item>
+                                           <item row="0" column="0">
+                                            <spacer name="horizontalSpacer_224">
+                                             <property name="orientation">
+                                              <enum>Qt::Orientation::Horizontal</enum>
+                                             </property>
+                                             <property name="sizeHint" stdset="0">
+                                              <size>
+                                               <width>40</width>
+                                               <height>20</height>
+                                              </size>
+                                             </property>
+                                            </spacer>
+                                           </item>
+                                           <item row="0" column="2">
+                                            <spacer name="horizontalSpacer_225">
+                                             <property name="orientation">
+                                              <enum>Qt::Orientation::Horizontal</enum>
+                                             </property>
+                                             <property name="sizeHint" stdset="0">
+                                              <size>
+                                               <width>40</width>
+                                               <height>20</height>
+                                              </size>
+                                             </property>
+                                            </spacer>
+                                           </item>
+                                          </layout>
+                                         </item>
+                                         <item row="2" column="0">
+                                          <widget class="ModernProgressBar" name="pbarVol_19">
+                                           <property name="styleSheet">
+                                            <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                                           </property>
+                                           <property name="value">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="alignment">
+                                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="1" column="0">
+                                          <widget class="QLabel" name="label_20">
+                                           <property name="font">
+                                            <font>
+                                             <pointsize>12</pointsize>
+                                             <bold>false</bold>
+                                            </font>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">color: white;
+border: 0px;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>CANAL 2</string>
+                                           </property>
+                                           <property name="alignment">
+                                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_40">
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>12</pointsize>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>CONTROLADOR DE CANAL</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_22">
+                                 <item>
+                                  <widget class="QFrame" name="frame_CH_13">
+                                   <property name="frameShape">
+                                    <enum>QFrame::Shape::StyledPanel</enum>
+                                   </property>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Shadow::Raised</enum>
+                                   </property>
+                                   <layout class="QGridLayout" name="gridLayout_171">
+                                    <item row="0" column="1">
+                                     <widget class="QGroupBox" name="groupBox_24">
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>180</width>
+                                        <height>16777215</height>
+                                       </size>
+                                      </property>
+                                      <property name="styleSheet">
+                                       <string notr="true">background-color: #3E2723;
+border: 1px solid black;      /* opcional: força borda */
+border-radius: 6px;   /* quanto maior o número, mais arredondado */
+
+</string>
+                                      </property>
+                                      <property name="title">
+                                       <string/>
+                                      </property>
+                                      <layout class="QGridLayout" name="gridLayout_172">
+                                       <item row="1" column="0">
+                                        <layout class="QHBoxLayout" name="horizontalLayout_57">
+                                         <item>
+                                          <layout class="QGridLayout" name="gridLayout_173">
+                                           <item row="2" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_174">
+                                             <item row="0" column="1">
+                                              <spacer name="horizontalSpacer_226">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="2">
+                                              <widget class="ModernDial" name="dial_19">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>80</width>
+                                                 <height>80</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>80</width>
+                                                 <height>80</height>
+                                                </size>
+                                               </property>
+                                               <property name="wrapping">
+                                                <bool>true</bool>
+                                               </property>
+                                               <property name="notchTarget">
+                                                <double>100.000000000000000</double>
+                                               </property>
+                                               <property name="notchesVisible">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="3">
+                                              <spacer name="horizontalSpacer_227">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="4" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_175">
+                                             <item row="0" column="2">
+                                              <widget class="QPushButton" name="pbMuteHELP_2">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>42</width>
+                                                 <height>42</height>
+                                                </size>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">background-color: #3E2723;</string>
+                                               </property>
+                                               <property name="text">
+                                                <string/>
+                                               </property>
+                                               <property name="checkable">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="1">
+                                              <spacer name="horizontalSpacer_228">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="3">
+                                              <spacer name="horizontalSpacer_229">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="1" column="0">
+                                            <layout class="QHBoxLayout" name="horizontalLayout_58">
+                                             <item>
+                                              <widget class="QPushButton" name="pbMinus_20">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="font">
+                                                <font>
+                                                 <pointsize>20</pointsize>
+                                                 <fontweight>Black</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">background-color: #3E2723;</string>
+                                               </property>
+                                               <property name="text">
+                                                <string/>
+                                               </property>
+                                               <property name="flat">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <spacer name="horizontalSpacer_230">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item>
+                                              <widget class="QPushButton" name="pbPlus_20">
+                                               <property name="minimumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="maximumSize">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>40</height>
+                                                </size>
+                                               </property>
+                                               <property name="font">
+                                                <font>
+                                                 <pointsize>20</pointsize>
+                                                 <fontweight>Black</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">background-color: #3E2723;</string>
+                                               </property>
+                                               <property name="text">
+                                                <string/>
+                                               </property>
+                                               <property name="flat">
+                                                <bool>true</bool>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                           <item row="0" column="0">
+                                            <layout class="QGridLayout" name="gridLayout_176">
+                                             <item row="0" column="0">
+                                              <spacer name="horizontalSpacer_231">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                             <item row="0" column="1">
+                                              <widget class="QLabel" name="labelPercentCH02_14">
+                                               <property name="font">
+                                                <font>
+                                                 <family>Inter</family>
+                                                 <strikeout>false</strikeout>
+                                                 <fontweight>ExtraBold</fontweight>
+                                                </font>
+                                               </property>
+                                               <property name="styleSheet">
+                                                <string notr="true">color: #ffffaa;
+ border: 0px solid black;      /* opcional: força borda */
+</string>
+                                               </property>
+                                               <property name="text">
+                                                <string/>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item row="0" column="2">
+                                              <spacer name="horizontalSpacer_232">
+                                               <property name="orientation">
+                                                <enum>Qt::Orientation::Horizontal</enum>
+                                               </property>
+                                               <property name="sizeHint" stdset="0">
+                                                <size>
+                                                 <width>40</width>
+                                                 <height>20</height>
+                                                </size>
+                                               </property>
+                                              </spacer>
+                                             </item>
+                                            </layout>
+                                           </item>
+                                          </layout>
+                                         </item>
+                                         <item>
+                                          <widget class="QProgressBar" name="progressBar_20">
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>20</width>
+                                             <height>1000</height>
+                                            </size>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">background-color: #3E2723;</string>
+                                           </property>
+                                           <property name="value">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="textVisible">
+                                            <bool>false</bool>
+                                           </property>
+                                           <property name="orientation">
+                                            <enum>Qt::Orientation::Vertical</enum>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <layout class="QGridLayout" name="gridLayout_177">
+                                         <item row="1" column="0">
+                                          <widget class="QLabel" name="label_41">
+                                           <property name="font">
+                                            <font>
+                                             <pointsize>12</pointsize>
+                                             <bold>false</bold>
+                                            </font>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">color: white;
+border: 0px;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="alignment">
+                                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="2" column="0">
+                                          <widget class="QProgressBar" name="pbarVol_20">
+                                           <property name="styleSheet">
+                                            <string notr="true">background-color: #3E2723;
+color:  #3E2723;</string>
+                                           </property>
+                                           <property name="value">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="alignment">
+                                            <set>Qt::AlignmentFlag::AlignCenter</set>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="0" column="0">
+                                          <layout class="QGridLayout" name="gridLayout_178">
+                                           <item row="0" column="2">
+                                            <spacer name="horizontalSpacer_234">
+                                             <property name="orientation">
+                                              <enum>Qt::Orientation::Horizontal</enum>
+                                             </property>
+                                             <property name="sizeHint" stdset="0">
+                                              <size>
+                                               <width>40</width>
+                                               <height>20</height>
+                                              </size>
+                                             </property>
+                                            </spacer>
+                                           </item>
+                                           <item row="0" column="1">
+                                            <widget class="QPushButton" name="btRotuloHELP">
+                                             <property name="font">
+                                              <font>
+                                               <fontweight>Black</fontweight>
+                                              </font>
+                                             </property>
+                                             <property name="styleSheet">
+                                              <string notr="true">background-color: transparent;
+color: white;
+border: 0px;</string>
+                                             </property>
+                                             <property name="text">
+                                              <string>ROTULO</string>
+                                             </property>
+                                             <property name="flat">
+                                              <bool>true</bool>
+                                             </property>
+                                            </widget>
+                                           </item>
+                                           <item row="0" column="0">
+                                            <spacer name="horizontalSpacer_233">
+                                             <property name="orientation">
+                                              <enum>Qt::Orientation::Horizontal</enum>
+                                             </property>
+                                             <property name="sizeHint" stdset="0">
+                                              <size>
+                                               <width>40</width>
+                                               <height>20</height>
+                                              </size>
+                                             </property>
+                                            </spacer>
+                                           </item>
+                                          </layout>
+                                         </item>
+                                        </layout>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_42">
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>12</pointsize>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>RÓTULO DO CONTROLADOR</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <spacer name="horizontalSpacer_235">
+                                 <property name="orientation">
+                                  <enum>Qt::Orientation::Horizontal</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>40</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item row="1" column="0">
+                              <spacer name="verticalSpacer_9">
+                               <property name="orientation">
+                                <enum>Qt::Orientation::Vertical</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>20</width>
+                                 <height>40</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                            </layout>
                            </widget>
                           </widget>
                          </item>

@@ -210,7 +210,7 @@ MainWindow::MainWindow(QWidget *parent)
     textos = textos + "do botão de volume ou advindo do mixer. O <b>valor percentual real</b> está dentro do <b>disco de volume rotativo</b>.";
     helpTexts.append(textos);
 
-    //VOLUME ROTATIVO
+    //VOLUME ROTATIVO helpText[5]
     textos = "<h1>Volume Rotativo</h1>";
     textos = textos + "<p>Nos programas tradicionais, o ajuste de volume é feito através dos faders lineares. O problema com esse tipo de ajuste em";
     textos = textos + " tablets é a imprecisão no ajuste, gerando saltos significativos de volume. Com o disco de volume rotativo a precisão é muito maior.";
@@ -221,18 +221,50 @@ MainWindow::MainWindow(QWidget *parent)
     textos = textos + " maior será a precisão ao efetuar o ajuste.";
     helpTexts.append(textos);
 
-    //VOLUME INCREMENTAL
+    //VOLUME INCREMENTAL helpText[6]
     textos = "<h1>Volume por incremento/decremento</h1>";
     textos = textos + "<p>Os botões <b>+</b> e <b>-</b> fazem o ajuste de volume incrementando ou decrementando em 1% a cada toque. Em muitos casos ";
     textos = textos + "pode ser mais adequado (e mais rápido) ajustar o volume através desse botões. Sinta-se à vontade para usar seu modo preferido!";
     helpTexts.append(textos);
 
-    //MUDO
+    //MUDO helpText[7]
     textos = "<h1>Botões de mute/unmute</h1>";
     textos = textos + "<p>Quando os microfones estão abertos, o botão de mute fica verde, com o desenho de um microfone. Quando algum microfone é ";
     textos = textos + " colocado em <b>mudo</b>, o botão fica vermelho, com um desenho de microfone cortado.";
     textos = textos + "<p>Dependendo do momento, determinados microfones precisam estar fechados. Para reduzir esse trabalho, veja o menu de ajuda <b>CRIAR E MODIFICAR PERFIL</b>.";
     textos = textos + "Abaixo, é possível testar o botão para observar sua mudança (no controlador à direita).";
+    helpTexts.append(textos);
+
+    //CRIAR E MODIFICAR PERFIL helpText[8]
+    textos = "<h1>Criar e Modificar perfil</h1>";
+    textos = textos + "<p>Repare no topo da tela os botões:";
+    textos = textos + "<p><b>INICIO ORAÇÃO RECITATIVO TESTEMUNHO PALAVRA ENCERRAMENTO</b>";
+    textos = textos + "<p>Durante o culto de louvor e adoração a Deus, temos esses diferentes momentos. Em cada momento, uma combinação diferente de microfones fica aberto ou fechado.";
+    textos = textos + "<p>Para auxiliar o operador de som na comunhão durante o culto direcionando menos atenção à operação dos microfones, foi criado o perfil do momento.";
+    textos = textos + "<p>Inicialmente não há uma configuração. Então deve-se tocar no botão <b>INICIO</b>, tocar nos microfones para que fiquem como desejado (por exemplo, no início apenas ";
+    textos = textos + "o microfone do púlpito é utilizado, os demais microfones podem ficar mudos), então toca-se em <b>GRAVAR ESTADOS DOS MICROFONES</b>.";
+    textos = textos + " Feito isso, podemos então tocar no botão <b>ORAÇÃO</b>, onde o púlpito normalmente é fechado e o microfone de oração é aberto por padrão. Ao fazer essa configuração, clicamos em ";
+    textos = textos + "<b>GRAVAR ESTADOS DOS MICS<b>. Isso fará a gravação dos estados dos microfones no perfil atual. Assim, já teremos gravado dois perfís: <b>INICIO</b> e <b>ORAÇÃO</b>.";
+    textos = textos + " Faça isso em cada um dos perfis. Na próxima vez que um dos botões do topo forem tocados, a combinação dos microfones será automática!";
+    textos = textos + "<p><p><H3>E se quiser modificar o perfil?</h3>";
+    textos = textos + "<p>Se quiser modificar o perfil, basta ajustar a nova combinação e tocar novamente em <b>GRAVAR ESTADOS DOS MICS</b>.";
+    textos = textos + "<p>Cada vez que um novo estado for gravado, a próxima vez que o botão do topo for acessado, a configuração já será a nova.";
+    textos = textos + "<p><p><h3>E se quiser remover os perfís?</h3>";
+    textos = textos + "<p>Se quiser voltar ao padrão de instalação, basta abrir todos os microfones e gravar cada perfil com todos os microfones abertos.";
+    textos = textos + "<p><p><h3>E se precisar usar algum microfone que esteja fechado?</h3>";
+    textos = textos + "<p>Se um determinado microfone estiver gravado no perfil como <b>fechado</b>, basta tira o <b>mute</b>. Se for ocasional, não precisa gravar o perfil. ";
+    textos = textos + "A próxima vez que o perfil for acessado, automaticamente voltará a estar mudo.";
+    helpTexts.append(textos);
+
+    //RÓTULOS
+    textos = "<h1>Rótulos dos Canais</h1>";
+    textos = textos + "<p>Em cada controlador de canal há um título que rotula o canal. Se desejar nomear de forma diferente, toque sobre o título e escreva o novo nome e aperte <b>OK</b>. Se tiver saido do teclado, basta tocar em algum botão ";
+    textos = textos + "como <b>mute</b> ou <b>+</b> seguido de <b>-</b>, ou se for nomear outro controlador de canal, toque no próximo rótulo. Experimente fazê-lo no <b>RÓTULO DO CONTROLADOR</b> abaixo.";
+    helpTexts.append(textos);
+
+    textos.clear();
+
+    connect(ui->btRotuloHELP, SIGNAL(clicked(bool)), this, SLOT(changeTitle()));
 
     for (int i = 0; i < NUMBER_OF_HELPS; ++i) {
         helpButtons[i]->setProperty("pageIndex", i);
@@ -588,13 +620,16 @@ MainWindow::MainWindow(QWidget *parent)
                     const bool checked = (on != 0);
                     if (ui->pushButton_LR) {
                         if (ui->pushButton_LR->isChecked() != checked) {
-                            QSignalBlocker block(ui->pushButton_LR);
+                            QSignalBlocker block2(ui->pushButton_LR);
                             ui->pushButton_LR->setChecked(checked);
                         }
+
+
                         ui->pushButton_LR->setIcon(QIcon(checked
                                                              ? QStringLiteral(":/icons/resources/unmuted.svg")
                                                              : QStringLiteral(":/icons/resources/muted.svg")));
                     }
+
                     return;
                 }
 
