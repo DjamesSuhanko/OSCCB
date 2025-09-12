@@ -4725,7 +4725,26 @@ color: gray;</string>
                            <property name="currentIndex">
                             <number>0</number>
                            </property>
-                           <widget class="QWidget" name="page_void"/>
+                           <widget class="QWidget" name="page_void">
+                            <layout class="QGridLayout" name="gridLayout_180">
+                             <item row="0" column="0">
+                              <widget class="QLabel" name="label_21">
+                               <property name="font">
+                                <font>
+                                 <pointsize>72</pointsize>
+                                 <bold>true</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>OSCCB</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignmentFlag::AlignCenter</set>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
                            <widget class="QWidget" name="page_ch">
                             <layout class="QGridLayout" name="gridLayout_77">
                              <item row="0" column="0">

@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // ui->comboBoxHelp->setPopupMaxHeight(280);
 
+
     // inicializa cache de mute enviado
     if (!s_lastMuteInit) {
         for (int i=0;i<NUMBER_OF_CHANNELS;++i) s_lastMuteSent[i] = -1;
