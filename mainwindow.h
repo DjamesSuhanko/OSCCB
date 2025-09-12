@@ -20,9 +20,9 @@
 #include <modernbutton.h>
 #include <modernprogressbar.h>
 
-
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
+#define NUMBER_OF_HELPS    9 //botões de help na aba menu
 #define PROFILE_INI "profiles.ini"
 #define LOCAL_PORT_BIND 12000
 
@@ -82,6 +82,10 @@ private slots:
     void flushLRFaderSend();
     void onConnectButton();
 
+    void onHelpButtonsClicked();
+
+    void pbMuteHelpSlot();
+
 private:
     Ui::MainWindow *ui;
 
@@ -112,6 +116,9 @@ private:
     QButtonGroup *sceneGroup = nullptr;
     // QButtonGroup *labelChanGroup = nullptr;
 
+    QButtonGroup *helpGroup = nullptr;
+    QPushButton *helpButtons[NUMBER_OF_HELPS];
+
     QPushButton *titlesArray[NUMBER_OF_CHANNELS]{};
     ModernButton *pbTauArray[NUMBER_OF_SCENES]{};     // <- cenas (6)
 
@@ -121,6 +128,8 @@ private:
     QLabel *labelsPercentArray[NUMBER_OF_CHANNELS]{};
     ModernProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
     QProgressBar*  meterBarsArray[NUMBER_OF_CHANNELS]{};
+
+    QStringList helpTexts;
 
     QDial* dials[NUMBER_OF_CHANNELS]{};
     int   accumArr[NUMBER_OF_CHANNELS]{};            // 0..10000
@@ -141,6 +150,10 @@ private:
     float currentFaderLR = 0.0f;
     bool  draggingLR = false;
     QTimer* sendTimerLR = nullptr;
+
+    QString html_start  = "<div style='text-align: justify;'>";
+    QString html_end = "</div>";
+
 };
 
 #endif // MAINWINDOW_H
