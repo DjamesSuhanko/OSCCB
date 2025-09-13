@@ -488,28 +488,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_0">
+                            <widget class="QFrame" name="frameMeter_ch01">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -588,24 +589,29 @@ border: 0px;</string>
                             </widget>
                            </item>
                            <item>
-                            <widget class="ModernProgressBar" name="pbarVol_0">
-                             <property name="font">
-                              <font>
-                               <fontweight>ExtraBold</fontweight>
-                              </font>
+                            <widget class="QFrame" name="frameVol_1">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -901,28 +907,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_1">
+                            <widget class="QFrame" name="frameMeter_ch02">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -930,6 +937,33 @@ QPushButton:checked {
                          </item>
                          <item row="0" column="0">
                           <layout class="QGridLayout" name="gridLayout_30">
+                           <item row="2" column="0">
+                            <widget class="QFrame" name="frameVol_2">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
+                             </property>
+                            </widget>
+                           </item>
                            <item row="0" column="0">
                             <layout class="QGridLayout" name="gridLayout_43">
                              <item row="0" column="1">
@@ -979,23 +1013,6 @@ border: 0px;</string>
                               </spacer>
                              </item>
                             </layout>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_1">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
                            </item>
                            <item row="1" column="0">
                             <widget class="QLabel" name="label_2">
@@ -1309,28 +1326,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_2">
+                            <widget class="QFrame" name="frameMeter_ch03">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -1409,19 +1427,29 @@ border: 0px;</string>
                             </widget>
                            </item>
                            <item>
-                            <widget class="ModernProgressBar" name="pbarVol_2">
+                            <widget class="QFrame" name="frameVol_3">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
                              <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -1716,28 +1744,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_3">
+                            <widget class="QFrame" name="frameMeter_ch04">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -1745,20 +1774,50 @@ QPushButton:checked {
                          </item>
                          <item row="0" column="0">
                           <layout class="QGridLayout" name="gridLayout_31">
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_3">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_3">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="styleSheet">
+                              <string notr="true">color: white;
+border: 0px;</string>
+                             </property>
+                             <property name="text">
+                              <string>CANAL 4</string>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QFrame" name="frameVol_4">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -1812,26 +1871,6 @@ border: 0px;</string>
                              </item>
                             </layout>
                            </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="label_3">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;</string>
-                             </property>
-                             <property name="text">
-                              <string>CANAL 4</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -1870,6 +1909,33 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                         <layout class="QGridLayout" name="gridLayout_5">
                          <item row="0" column="0">
                           <layout class="QGridLayout" name="gridLayout_51">
+                           <item row="2" column="0">
+                            <widget class="QFrame" name="frameVol_5">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
+                             </property>
+                            </widget>
+                           </item>
                            <item row="0" column="0">
                             <layout class="QGridLayout" name="gridLayout_47">
                              <item row="0" column="2">
@@ -1919,23 +1985,6 @@ border: 0px;</string>
                               </spacer>
                              </item>
                             </layout>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_4">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
                            </item>
                            <item row="1" column="0">
                             <widget class="QLabel" name="label_6">
@@ -2215,28 +2264,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_4">
+                            <widget class="QFrame" name="frameMeter_ch05">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -2278,6 +2328,54 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                         <layout class="QGridLayout" name="gridLayout_6">
                          <item row="0" column="0">
                           <layout class="QGridLayout" name="gridLayout_53">
+                           <item row="3" column="0">
+                            <widget class="QFrame" name="frameVol_6">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QLabel" name="label_8">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: white;
+border: 0px;
+</string>
+                             </property>
+                             <property name="text">
+                              <string>CANAL 6</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
                            <item row="1" column="0">
                             <layout class="QGridLayout" name="gridLayout_45">
                              <item row="0" column="0">
@@ -2327,44 +2425,6 @@ border: 0px;</string>
                               </spacer>
                              </item>
                             </layout>
-                           </item>
-                           <item row="3" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_5">
-                             <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
-                             </property>
-                             <property name="value">
-                              <number>0</number>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="QLabel" name="label_8">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;
-</string>
-                             </property>
-                             <property name="text">
-                              <string>CANAL 6</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
                            </item>
                           </layout>
                          </item>
@@ -2623,28 +2683,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_5">
+                            <widget class="QFrame" name="frameMeter_ch06">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -2945,28 +3006,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_6">
+                            <widget class="QFrame" name="frameMeter_ch07">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -2975,19 +3037,29 @@ QPushButton:checked {
                          <item row="0" column="0">
                           <layout class="QGridLayout" name="gridLayout_54">
                            <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_6">
+                            <widget class="QFrame" name="frameVol_7">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
                              <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -3365,28 +3437,29 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_7">
+                            <widget class="QFrame" name="frameMeter_ch08">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>20</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -3394,20 +3467,51 @@ QPushButton:checked {
                          </item>
                          <item row="0" column="1">
                           <layout class="QGridLayout" name="gridLayout_55">
-                           <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_7">
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_5">
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
                              <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
+                              <string notr="true">color: white;
+border: 0px;
 </string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="text">
+                              <string>CANAL 8</string>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QFrame" name="frameVol_8">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -3461,27 +3565,6 @@ border: 0px;</string>
                              </item>
                             </layout>
                            </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="label_5">
-                             <property name="font">
-                              <font>
-                               <pointsize>12</pointsize>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">color: white;
-border: 0px;
-</string>
-                             </property>
-                             <property name="text">
-                              <string>CANAL 8</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -3533,19 +3616,29 @@ border-radius: 6px;   /* quanto maior o número, mais arredondado */
                          <item row="0" column="1">
                           <layout class="QGridLayout" name="gridLayout_64">
                            <item row="2" column="0">
-                            <widget class="ModernProgressBar" name="pbarVol_LR">
+                            <widget class="QFrame" name="frameVol_LR">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>20</height>
+                              </size>
+                             </property>
                              <property name="styleSheet">
-                              <string notr="true">  border: 1px solid #cyan;
-  border-radius: 4px;
-  background: #1f2125;
-color: white;
-</string>
+                              <string notr="true">  border: 1px solid #3a3f47;
+  border-radius: 2px;
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="alignment">
-                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -3614,6 +3707,23 @@ border: 0px;
                              </property>
                              <property name="text">
                               <string>L/R</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="0">
+                            <widget class="ModernProgressBar" name="pbarVol_LR">
+                             <property name="styleSheet">
+                              <string notr="true">  border: 1px solid #cyan;
+  border-radius: 4px;
+  background: #1f2125;
+color: white;
+</string>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -3883,54 +3993,56 @@ QPushButton:checked {
                             </layout>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_L">
+                            <widget class="QFrame" name="frameMeter_L">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>10</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
                            <item>
-                            <widget class="QProgressBar" name="progressBar_R">
+                            <widget class="QFrame" name="frameMeter_R">
+                             <property name="minimumSize">
+                              <size>
+                               <width>14</width>
+                               <height>0</height>
+                              </size>
+                             </property>
                              <property name="maximumSize">
                               <size>
-                               <width>10</width>
-                               <height>1000</height>
+                               <width>14</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QProgressBar {
-  border: 1px solid #3a3f47;
+                              <string notr="true">  border: 1px solid #3a3f47;
   border-radius: 4px;
-  background: #1f2125;
-}</string>
+background: #1f2125;</string>
                              </property>
-                             <property name="value">
-                              <number>0</number>
+                             <property name="frameShape">
+                              <enum>QFrame::Shape::StyledPanel</enum>
                              </property>
-                             <property name="textVisible">
-                              <bool>false</bool>
-                             </property>
-                             <property name="orientation">
-                              <enum>Qt::Orientation::Vertical</enum>
+                             <property name="frameShadow">
+                              <enum>QFrame::Shadow::Raised</enum>
                              </property>
                             </widget>
                            </item>
@@ -4282,6 +4394,18 @@ border: 1px solid rgb(80, 80, 80);  ;</string>
                    <attribute name="title">
                     <string>Config</string>
                    </attribute>
+                   <layout class="QGridLayout" name="gridLayout_181">
+                    <item row="0" column="0">
+                     <widget class="QFrame" name="frameMeters">
+                      <property name="frameShape">
+                       <enum>QFrame::Shape::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Shadow::Raised</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                   <widget class="QWidget" name="tabAjuda">
                    <attribute name="title">

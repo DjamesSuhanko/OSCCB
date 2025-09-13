@@ -13,22 +13,28 @@ ANDROID_TARGET_SDK_VERSION = 35
 # ====================================================================
 
 SOURCES += \
+    channelmeterwidget.cpp \
     main.cpp \
     mainwindow.cpp \
+    meterswidget.cpp \
     modernbutton.cpp \
     moderncombobox.cpp \
     moderndial.cpp \
     modernprogressbar.cpp \
     oscclient.cpp \
+    percentbarwidget.cpp \
     titledialog.cpp
 
 HEADERS += \
+    channelmeterwidget.h \
     mainwindow.h \
+    meterswidget.h \
     modernbutton.h \
     moderncombobox.h \
     moderndial.h \
     modernprogressbar.h \
     oscclient.h \
+    percentbarwidget.h \
     titledialog.h
 
 FORMS += \

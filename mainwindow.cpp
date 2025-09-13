@@ -49,6 +49,86 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+// (Opcional) LR – só se existir frame para eles no .ui
+#ifdef HAVE_LR_FRAMES
+    meterLRFrames[0] = ui->frameMeter_L;
+    meterLRFrames[1] = ui->frameMeter_R;
+#endif
+
+#ifdef HAVE_LR_FRAMES
+    for (int i=0;i<2;++i){
+        auto* host = meterLRFrames[i];
+        if (!host) continue;
+        meterLR[i] = new ChannelMeterWidget(host);
+        if (!host->layout()){
+            auto* lay = new QVBoxLayout(host);
+            lay->setContentsMargins(0,0,0,0);
+            host->setLayout(lay);
+        } else {
+            host->layout()->setContentsMargins(0,0,0,0);
+        }
+        host->layout()->addWidget(meterLR[i]);
+        meterLR[i]->fps(30).decay(1.0f).padding(2).radius(3).gradient(true);
+    }
+#endif
+
+
+    // --------------------------------- EQ -------------------------------------
+    //Será magnifico para o EQ
+    metersWidget = new MetersWidget(NUMBER_OF_CHANNELS, this);
+    metersWidget->setFps(30);              // 30 Hz
+    metersWidget->setDecayPerSecond(1.0f); // decai ~ 1.0 por segundo (0..1 escala)
+    metersWidget->setBarPadding(4);
+    metersWidget->setBarRadius(3);
+
+    ui->frameMeters->setLayout(new QVBoxLayout);
+    ui->frameMeters->layout()->setContentsMargins(0,0,0,0);
+    ui->frameMeters->layout()->addWidget(metersWidget);
+
+    //metersWidget->setChannel01(0, 1.0);
+    // depois de criar o metersWidget:
+    auto sim = new QTimer(this);
+    sim->setInterval(50); // ~20 Hz de "amostras"
+    connect(sim, &QTimer::timeout, this, [this]{
+        static float t = 0.f; t += 0.05f;
+        for (int ch = 0; ch < NUMBER_OF_CHANNELS; ++ch) {
+            float v = 0.5f + 0.5f * std::sin(t + ch*0.6f); // 0..1
+            metersWidget->setChannel01(ch, v);
+        }
+        float l = 0.5f + 0.5f * std::sin(t), r = 0.5f + 0.5f * std::cos(t*0.9f);
+        metersWidget->setLR01(l, r);
+    });
+    sim->start();
+
+    //---------------------- PARA EQ - PODE SER VISTO NO NA ABA CONFIG ---------------------------
+
+
+
+
+    // auto sim2 = new QTimer(meterCH0);
+    // sim2->setInterval(33); // ~30 Hz
+    // static float t = 0.f;
+
+    // connect(sim, &QTimer::timeout, meterCH0, [=]{
+    //     t += 0.05f;
+
+    //     float v = 0.5f + 0.5f * std::sin(t);
+
+    //     // ruído leve: [-3..+3] / 300
+    //     float noise = (QRandomGenerator::global()->bounded(7) - 3) / 300.0f;
+    //     v = qBound(0.0f, v + noise, 1.0f);
+
+    //     // pico ocasional: 3% de chance
+    //     if (QRandomGenerator::global()->bounded(100) < 3) v = 1.0f;
+
+    //     meterCH0->value01(v);
+    // });
+    // sim2->start();
+
+
+
+
     // //REF:COMBOBOX
     // QStringList comboItens = {"Inicio","Canais","Meter de Sinais","Meter de Volume","Volume Rotativo","Volume Incremental","Botão de Mute","Criar e Modificar Perfil","Rótulos de canais"};
     // ui->comboBox->addItems(comboItens);
@@ -132,10 +212,30 @@ MainWindow::MainWindow(QWidget *parent)
     labelsPercentArray[6] = ui->labelPercentCH07; labelsPercentArray[7] = ui->labelPercentCH08;
 
     //REF:VOLUME Barras de VOLUME (fader em %) -> pbarVol_x
-    percBarsArray[0] = ui->pbarVol_0; percBarsArray[1] = ui->pbarVol_1;
-    percBarsArray[2] = ui->pbarVol_2; percBarsArray[3] = ui->pbarVol_3;
-    percBarsArray[4] = ui->pbarVol_4; percBarsArray[5] = ui->pbarVol_5;
-    percBarsArray[6] = ui->pbarVol_6; percBarsArray[7] = ui->pbarVol_7;
+    volFrames[0] = ui->frameVol_1; volFrames[1] = ui->frameVol_2; volFrames[2] = ui->frameVol_3; volFrames[3] = ui->frameVol_4;
+    volFrames[4] = ui->frameVol_5; volFrames[5] = ui->frameVol_6; volFrames[6] = ui->frameVol_7; volFrames[7] = ui->frameVol_8;
+
+    for (int i = 0; i < NUMBER_OF_CHANNELS; ++i) {
+        QFrame* host = volFrames[i];
+        if (!host) continue;
+
+        // garanta um layout (não recrie se já existir)
+        auto lay = qobject_cast<QVBoxLayout*>(host->layout());
+        if (!lay) {
+            lay = new QVBoxLayout(host);
+            lay->setContentsMargins(0,0,0,0);
+            host->setLayout(lay);
+        }
+
+        auto bar = new PercentBarWidget(host);
+        bar->radius(2).padding(2).background(QColor(0,0,0,60)).color(QColor("#99bad5")).showText(false);
+        bar->setMaximumHeight(25);
+        bar->setMinimumHeight(25);
+
+        lay->addWidget(bar);
+        volBars[i] = bar;
+    }
+
 
 
     //REF:MAIS
@@ -154,6 +254,52 @@ MainWindow::MainWindow(QWidget *parent)
     helpButtons[0] = ui->pbHelp_01; helpButtons[1] = ui->pbHelp_02; helpButtons[2] = ui->pbHelp_03; helpButtons[3] = ui->pbHelp_04;
     helpButtons[4] = ui->pbHelp_05; helpButtons[5] = ui->pbHelp_06; helpButtons[6] = ui->pbHelp_07; helpButtons[7] = ui->pbHelp_08;
     helpButtons[8] = ui->pbHelp_09;
+
+    //REF:FRAMES
+    metersFrames[0] = ui->frameMeter_ch01; metersFrames[1] = ui->frameMeter_ch02; metersFrames[2] = ui->frameMeter_ch03;
+    metersFrames[3] = ui->frameMeter_ch04; metersFrames[4] = ui->frameMeter_ch05; metersFrames[5] = ui->frameMeter_ch06;
+    metersFrames[6] = ui->frameMeter_ch07; metersFrames[7] = ui->frameMeter_ch08;
+
+    for (uint8_t i=0;i<NUMBER_OF_CHANNELS;i++){
+        meterFrameArray[i] = new ChannelMeterWidget(metersFrames[i]);
+        metersFrames[i]->setLayout(new QVBoxLayout);
+        metersFrames[i]->layout()->setContentsMargins(0,0,0,0);
+        metersFrames[i]->layout()->addWidget(meterFrameArray[i]);
+
+        // configuração encadeada:
+        meterFrameArray[i] ->fps(30).decay(1.0f).padding(2).radius(3).gradient(true);//.color(QColor("#99bad5"));
+    }
+
+
+
+
+// --- FRAMES LR (precisam existir no .ui) ---
+#ifdef HAVE_LR_FRAMES
+    meterLRFrames[0] = ui->frameMeter_L;  // esquerdo
+    meterLRFrames[1] = ui->frameMeter_R;  // direito
+
+    for (int i = 0; i < 2; ++i) {
+        if (!meterLRFrames[i]) continue;
+
+        meterLR[i] = new ChannelMeterWidget(meterLRFrames[i]);
+
+        if (!meterLRFrames[i]->layout()) {
+            auto* lay = new QVBoxLayout(meterLRFrames[i]);
+            lay->setContentsMargins(0,0,0,0);
+            meterLRFrames[i]->setLayout(lay);
+        } else {
+            meterLRFrames[i]->layout()->setContentsMargins(0,0,0,0);
+        }
+        meterLRFrames[i]->layout()->addWidget(meterLR[i]);
+
+        // Config visual (igual aos canais)
+        meterLR[i]->fps(30).decay(1.0f).padding(2).radius(3).gradient(true);
+        //sem gradiente: meterLR[i]->gradient(false).color(QColor("#1b6ca8"));
+        //setter de 3 cores, pode usar:
+        // meterLR[i]->colors(QColor("#0D47A1"), QColor("#03A9F4"), QColor("#B3E5FC"));
+    }
+#endif
+
 
     ui->pb_TAU_0->setProperty("sceneKey", "INICIO");
     ui->pb_TAU_1->setProperty("sceneKey", "ORACAO");
@@ -447,45 +593,36 @@ MainWindow::MainWindow(QWidget *parent)
         });
     });
 
-    //REF:METER ===================== TIMER ÚNICO DE UI PARA METERS =====================
+    // REF:METER ===================== TIMER ÚNICO DE UI PARA METERS =====================
     if (!g_uiMeterTimer) {
         g_uiMeterTimer = new QTimer(this);
-        g_uiMeterTimer->setInterval(30);
-        g_uiMeterTimer->setTimerType(Qt::CoarseTimer);
+        g_uiMeterTimer->setInterval(30);                 // ~33ms também serve
+        g_uiMeterTimer->setTimerType(Qt::CoarseTimer);   // pode ser PreciseTimer se quiser
         connect(g_uiMeterTimer, &QTimer::timeout, this, [this](){
-            // canais 0..7
-            auto meterBarAt = [this](int ch)->QProgressBar*{
-                switch (ch) {
-                case 0: return ui->progressBar_0;
-                case 1: return ui->progressBar_1;
-                case 2: return ui->progressBar_2;
-                case 3: return ui->progressBar_3;
-                case 4: return ui->progressBar_4;
-                case 5: return ui->progressBar_5;
-                case 6: return ui->progressBar_6;
-                case 7: return ui->progressBar_7;
-                default: return (QProgressBar*)nullptr;
-                }
-            };
-
-            for (int ch=0; ch<kNumUiCh; ++ch) {
+            // canais 0..N-1
+            for (int ch = 0; ch < NUMBER_OF_CHANNELS; ++ch) {
                 if (g_nextPctCh[ch] != g_lastPctCh[ch]) {
-                    if (QProgressBar* bar = meterBarAt(ch)) bar->setValue(g_nextPctCh[ch]);
+                    if (meterFrameArray[ch]) {
+                        meterFrameArray[ch]->value01(g_nextPctCh[ch] / 100.0f); // % -> 0..1
+                    }
                     g_lastPctCh[ch] = g_nextPctCh[ch];
                 }
             }
-            // LR
-            if (ui->progressBar_L && g_nextPctLR[0] != g_lastPctLR[0]) {
-                ui->progressBar_L->setValue(g_nextPctLR[0]);
+
+#ifdef HAVE_LR_FRAMES
+            if (meterLR[0] && g_nextPctLR[0] != g_lastPctLR[0]) {
+                meterLR[0]->value01(g_nextPctLR[0] / 100.0f);
                 g_lastPctLR[0] = g_nextPctLR[0];
             }
-            if (ui->progressBar_R && g_nextPctLR[1] != g_lastPctLR[1]) {
-                ui->progressBar_R->setValue(g_nextPctLR[1]);
+            if (meterLR[1] && g_nextPctLR[1] != g_lastPctLR[1]) {
+                meterLR[1]->value01(g_nextPctLR[1] / 100.0f);
                 g_lastPctLR[1] = g_nextPctLR[1];
             }
+#endif
         });
         g_uiMeterTimer->start();
     }
+
     // ========================================================================
 
     // ====== Handler de RX (alimenta UI) ======
@@ -510,7 +647,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                //REF:METER Meters (/meters/1) -> progressBar_X (NÃO pbarVol_X)
+                //REF:METER Meters (/meters/1) ->  (NÃO pbarVol_X)
                 // ==========================================================
                 if (addr == QLatin1String("/meters/1") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -562,7 +699,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // ==========================================================
-                //REF:METER Meters LR (/meters/3) -> progressBar_L / progressBar_R
+                //REF:METER Meters LR (/meters/3) -> meter_L / meter_R
                 // ==========================================================
                 if (addr == QLatin1String("/meters/3") && !args.isEmpty()) {
                     const QVariant &v0 = args.first();
@@ -684,17 +821,15 @@ MainWindow::MainWindow(QWidget *parent)
                 // Fader (float 0..1) -> pbarVol_X e dials
                 if (addr.endsWith(QLatin1String("/mix/fader"))) {
                     if (dragging[idx]) {
-                        // Atualiza só o cache enquanto arrasta (não move o dial)
                         currentFaderArr[idx] = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
-
-                        // ↙↙ NOVO: mantém o arco verde proporcional durante o arrasto
                         if (dials[idx]) dials[idx]->setProperty("progress01", currentFaderArr[idx]);
-
-                        // (opcional) se quiser atualizar label/barra durante o arrasto:
-                        // labelsPercentArray[idx]->setText(QString::number(currentFaderArr[idx], 'f', 4));
-                        // if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(currentFaderArr[idx]*100.0f)));
+                        if (labelsPercentArray[idx])
+                            labelsPercentArray[idx]->setText(QString::number(currentFaderArr[idx], 'f', 4));
+                        if (volBars[idx])
+                            volBars[idx]->value01(currentFaderArr[idx]);   // 0..1
                         return;
                     }
+
 
                     float v01 = std::clamp(args.first().toFloat(), 0.0f, 1.0f);
                     currentFaderArr[idx] = v01;
@@ -710,7 +845,9 @@ MainWindow::MainWindow(QWidget *parent)
                     }
 
                     labelsPercentArray[idx]->setText(QString::number(v01, 'f', 4));
-                    if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(v01 * 100.0f)));
+                    //if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(v01 * 100.0f)));
+                    if (volBars[idx]) volBars[idx]->value01(v01);      // 0..1
+
                     return;
                 }
 
@@ -735,10 +872,6 @@ MainWindow::MainWindow(QWidget *parent)
                     return;
                 }
             });
-
-    // ====== Timer de decay do meter global  ======
-    connect(&meterDecayTimer, &QTimer::timeout, this, &MainWindow::updateMeterDecay);
-    meterDecayTimer.start(30);
 
     //REF:MUTE ====== Grupo de mute por canal ======
     group = new QButtonGroup(this);
@@ -1031,7 +1164,10 @@ void MainWindow::onDialValueChanged(int v)
 
     const float perc = currentFaderArr[idx] * 100.0f;
     labelsPercentArray[idx]->setText(QString::number(currentFaderArr[idx], 'f', 4));
-    if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
+    //if (volBars[idx]) volBars[idx]->value01(int(std::lround(perc)));  // perc = 0..100
+    if (volBars[idx]) volBars[idx]->value01(currentFaderArr[idx]);      // 0..1
+
+
 
     // Sempre agenda envio com throttle (~30 Hz), mesmo arrastando
     if (sendTimers[idx]) sendTimers[idx]->start();
@@ -1157,15 +1293,6 @@ void MainWindow::onMuteToggled(int id, bool checked)
     }
 }
 
-void MainWindow::onOscMeter(float val01)
-{
-    meterInstant = qBound(0, int(val01 * 1000.0f + 0.5f), 1000);
-    if (meterInstant > meterDisplay) {
-        meterDisplay = meterInstant;
-        ui->progressBar_0->setValue(meterDisplay);
-    }
-}
-
 void MainWindow::onMinusLRClicked()
 {
     const int TOTAL = 10000;     // 0..100.00% em unidades
@@ -1227,7 +1354,9 @@ void MainWindow::onMinusClicked()
 
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
-    if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
+    //if (percBarsArray[idx]) percBarsArray[idx]->setValue(int(std::lround(perc)));
+    if (volBars[idx]) volBars[idx]->valuePercent(int(std::lround(perc)));
+
 }
 
 void MainWindow::onPlusClicked()
@@ -1260,11 +1389,10 @@ void MainWindow::onPlusClicked()
 
     const float perc = accumArr[idx] / 100.0f;
     labelsPercentArray[idx]->setText(QString::number(perc/100.0f, 'f', 4));
-    if (percBarsArray[idx]){
-        percBarsArray[idx]->setValue(int(std::lround(perc)));
-
-
+    if (volBars[idx]) {
+        volBars[idx]->valuePercent(int(std::lround(perc)));
     }
+
 }
 
 void MainWindow::onSceneClicked(QAbstractButton* b)
@@ -1297,19 +1425,6 @@ void MainWindow::onHelpButtonsClicked()
 
     ui->stackedWidget->setCurrentIndex(idx > ui->stackedWidget->count() ? 0 : idx);
 
-}
-
-
-
-// ============ Meter decay ============
-void MainWindow::updateMeterDecay()
-{
-    if (meterDisplay > meterInstant) {
-        meterDisplay -= 5;
-        if (meterDisplay < meterInstant)
-            meterDisplay = meterInstant;
-        ui->progressBar_0->setValue(meterDisplay);
-    }
 }
 
 void MainWindow::onPlusLRClicked()
@@ -1360,6 +1475,8 @@ void MainWindow::pbMuteHelpSlot()
 
     }
 }
+
+
 
 MainWindow::~MainWindow()
 {

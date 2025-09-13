@@ -19,12 +19,17 @@
 #include <moderndial.h>
 #include <modernbutton.h>
 #include <modernprogressbar.h>
+#include <meterswidget.h>
+#include <channelmeterwidget.h>
+#include <QRandomGenerator>
+#include <percentbarwidget.h>
 
 #define NUMBER_OF_CHANNELS 8
 #define NUMBER_OF_SCENES   6
 #define NUMBER_OF_HELPS    9 //botões de help na aba menu
 #define PROFILE_INI "profiles.ini"
 #define LOCAL_PORT_BIND 12000
+#define HAVE_LR_FRAMES 1
 
 // Caminho do INI
 static QString profilesIniPath() {
@@ -48,7 +53,6 @@ public:
 
 public slots:
     void onDialValueChanged(int v);
-    void onOscMeter(float val01);
     void onPlusClicked();
     void onMinusClicked();
 
@@ -56,7 +60,6 @@ public slots:
     void onMinusLRClicked();
 
 private slots:
-    void updateMeterDecay();
     void onMuteToggled(int id, bool checked);
     void onMuteToggledLR(bool checked);
 
@@ -106,9 +109,7 @@ private:
     float currentFaderValue   = 0.0f;
 
     // meter
-    int    meterInstant  = 0;
-    int    meterDisplay  = 0;
-    QTimer meterDecayTimer;
+    //QTimer meterDecayTimer;
 
     // UI arrays
     QPushButton *buttons[NUMBER_OF_CHANNELS]{};
@@ -128,6 +129,8 @@ private:
     QLabel *labelsPercentArray[NUMBER_OF_CHANNELS]{};
     ModernProgressBar *percBarsArray[NUMBER_OF_CHANNELS]{};
     QProgressBar*  meterBarsArray[NUMBER_OF_CHANNELS]{};
+
+    MetersWidget *metersWidget;
 
     QStringList helpTexts;
 
@@ -153,6 +156,17 @@ private:
 
     QString html_start  = "<div style='text-align: justify;'>";
     QString html_end = "</div>";
+
+    ChannelMeterWidget *meterFrameArray[NUMBER_OF_CHANNELS];
+    QFrame *metersFrames[NUMBER_OF_CHANNELS];
+
+    // mainwindow.h
+    QFrame*             meterLRFrames[2] = {};      // ui->frameMeter_L / ui->frameMeter_R
+    ChannelMeterWidget* meterLR[2]       = {};
+
+    PercentBarWidget* volBars[NUMBER_OF_CHANNELS];
+    QFrame*          volFrames[NUMBER_OF_CHANNELS]{};
+
 
 };
 
