@@ -35,7 +35,7 @@ protected:
 private:
     // Aparência (defaults)
     QColor m_trackColor     = QColor(230,230,230);
-    QColor m_progressColor  = QColor(66,133,244);
+    QColor m_progressColor  = QColor("#99bad5");
     QColor m_handleColor    = QColor(30,30,30);
     QColor m_textColor      = QColor(30,30,30);
     int    m_thickness      = 10;

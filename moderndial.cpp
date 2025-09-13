@@ -4,8 +4,8 @@
 #include <cmath>
 
 // ⚠️ NÃO force o wrapping aqui — a MainWindow já define.
-//    Se quiser, comente a linha; manteremos visível para referência.
-//    setWrapping(false) aqui quebrou a detecção de voltas na sua lógica.
+//    Se quiser, comente a linha
+//    setWrapping(false) aqui quebrou a detecção de voltas na lógica.
 ModernDial::ModernDial(QWidget* parent) : QDial(parent) {
     setNotchesVisible(false);
     setMouseTracking(true);
@@ -51,7 +51,7 @@ void ModernDial::paintEvent(QPaintEvent* e) {
         norm01 = clamp01(norm01);
     }
 
-    // --------- PROGRESSO (VERDE) PROPORCIONAL AO TOTAL ----------
+    // --------- PROGRESSO PROPORCIONAL AO TOTAL ----------
     // Tente ler "progress01" da MainWindow (0..1 total após 10 voltas).
     // Se não vier, faça fallback para norm01/turns (cresce devagar).
     double total01 = -1.0;

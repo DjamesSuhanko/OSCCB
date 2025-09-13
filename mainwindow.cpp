@@ -229,8 +229,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         auto bar = new PercentBarWidget(host);
         bar->radius(2).padding(2).background(QColor(0,0,0,60)).color(QColor("#99bad5")).showText(false);
-        bar->setMaximumHeight(25);
-        bar->setMinimumHeight(25);
+        bar->setMaximumHeight(18);
+        bar->setMinimumHeight(18);
 
         lay->addWidget(bar);
         volBars[i] = bar;
@@ -469,8 +469,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dial_HELP->setProperty("showValue", true);
 
     // Aparência
-    ui->dial_HELP->setProperty("trackColor",    QColor("#e6e6e6"));
-    ui->dial_HELP->setProperty("progressColor", QColor("#00C853"));
+    ui->dial_HELP->setProperty("trackColor",    QColor("#1f2125"));
+    ui->dial_HELP->setProperty("progressColor", QColor("#99bad5"));
     ui->dial_HELP->setProperty("handleColor",   QColor("#ffffff"));
     ui->dial_HELP->setProperty("textColor",     QColor("white"));
     ui->dial_HELP->setProperty("thickness",     6);
@@ -488,8 +488,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dial_LR->setProperty("showValue", true);
 
     // Aparência
-    ui->dial_LR->setProperty("trackColor",    QColor("#e6e6e6"));
-    ui->dial_LR->setProperty("progressColor", QColor("#00C853"));
+    ui->dial_LR->setProperty("trackColor",    QColor("#1f2125"));
+    ui->dial_LR->setProperty("progressColor", QColor("#99bad5"));
     ui->dial_LR->setProperty("handleColor",   QColor("#ffffff"));
     ui->dial_LR->setProperty("textColor",     QColor("white"));
     ui->dial_LR->setProperty("thickness",     6);
@@ -512,6 +512,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (ui->pbarVol_LR){
         ui->pbarVol_LR->setValue(int(std::lround(currentFaderLR * 100.0f)));
     }
+    ui->pbarVol_LR->setHidden(true); //TODO: remover para reaparecer
 
     // ====== Sinais dos dials / plus / minus ======
 
@@ -548,8 +549,8 @@ MainWindow::MainWindow(QWidget *parent)
             dials[i]->setProperty("fullCircle", true);
             dials[i]->setProperty("displayTurnPercent", false); // texto = % total (se showValue=true)
             dials[i]->setProperty("showValue", true);          // normalmente os canais não mostram texto
-            dials[i]->setProperty("trackColor",    QColor("#e6e6e6"));
-            dials[i]->setProperty("progressColor", QColor("#00C853"));
+            dials[i]->setProperty("trackColor",    QColor("#1f2125"));
+            dials[i]->setProperty("progressColor", QColor("#99bad5"));
             dials[i]->setProperty("handleColor",   QColor("#ffffff"));
             dials[i]->setProperty("textColor",     QColor("white"));
             dials[i]->setProperty("thickness",     6);
@@ -917,7 +918,6 @@ MainWindow::MainWindow(QWidget *parent)
         pbPlus[i]->setPadding(10);
         pbPlus[i]->setText("+");
         pbPlus[i]->setCheckable(false);
-
         pbPlus[i]->setMinimumSize(30,30);
         pbPlus[i]->setMaximumSize(30,30);
 
