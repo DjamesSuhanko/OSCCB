@@ -1,0 +1,2 @@
+Esse app solicita permissão de rede para fazer a comunicação com o mixer via protocolo de rede UDP, abrindo um socket local. A comunicação é feita pelo protocolo OSC.
+Não são coletados dados de usuário, nem é necessário acesso à Internet. O app foi testado exclusivamente em rede local.
